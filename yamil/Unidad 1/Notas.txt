@@ -1,0 +1,39 @@
+
+Equipos conectados a internet (IP) - Servicio/Info.
+
+Dominio = Nombre de identificación (traduce numeros IP) / RELACION CON HOST.
+  - Facil de recordar y encontrar.
+
+
+NIC Argentina = Encargado del registro de nombres de dominio en AR.
+(Es necesaro inscribirse como Usuario en el sistema de NIC Argentina a través de la plataforma TAD
+ —Trámite a Distancia— para luego registrar un dominio).
+
+
+Hosting u Hospedaje = Delegación de Dominio .
+El alojamiento web (en inglés web hosting) es el servicio que provee a los usuarios de Internet
+un sistema para poder almacenar información, imágenes, vídeo, o cualquier contenido accesible vía Web
+
+
+SERVIDOR = Máquina (software) cuyo propósito es proveer datos de modo que otras máquinas puedan utilizarlos.
+	- Proporcionan el acceso a los archivos y servicios.
+
+ Servidor Web: Un servidor Web es un programa que sirve datos en forma de páginas Web, 
+               hipertextos o páginas HTML (HyperText Markup Language): textos complejos con enlaces, 
+               figuras, formularios, botones y objetos incrustados como animaciones o reproductores 
+               de sonidos. (HTTP=Protocolo transferencia/HTML=Formato archivo)
+               El CLIENTE es el encargado de interpretar el código HTML, es decir, de mostrar las fuentes,
+	       los colores y la disposición de los textos y objetos de la página. El servidor se encarga 
+               de transferir el código de la página sin llevar a cabo ninguna interpretación de la misma. 
+
+
+subdominio = certificacionwebyamil.000webhostapp.com  <----- PRACTICO 1.
+pass = s1m0n1988
+
+HTTP + SSL (Secure Socket Layer)  = HTTPS (Transferencia segura de información).
+- Sitios certificados y de confianza.
+
+
+
+
+

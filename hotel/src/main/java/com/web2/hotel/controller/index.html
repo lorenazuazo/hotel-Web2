@@ -1,35 +1,11 @@
 <!DOCTYPE html>
-<html xmlns= "http //www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" 
-        xmlns:sec="http://www.thymeleaf.org">
+<html xmlns= "http //www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!--para usar bootstrap  -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <!-- font-awesom -->
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-  <!-- iconos de materialize -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
- 	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Cardo:700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
-
-  
-  <!-- link CSS -->
-  <link rel="stylesheet" href="/static/css/mystyle.css" th:href="@{/css/mystyle.css}">
-
-    <!-- logo en pestanea de navegacion -->
-  <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
- 
-
-  <title >Hotel Sierras Inn</title>
-</head>
+<head th:replace="/administrator/components/head :: head"></head>
 
 <body data-spy="scroll" data-target="#myScrollspy">
 
-  <div th:replace="/components/nav"></div>
+  <div th:replace="/administrator/components/nav"></div>
   
   <!-- formulario de reserva -->
   <div class="margen imagen1">
@@ -82,7 +58,7 @@
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
-                      <span class="form-label">NiÃ±os</span>
+                      <span class="form-label">Niños</span>
                       <select class="form-control">
                         <option>0</option>
                         <option>1</option>
@@ -118,10 +94,10 @@
         </div>
         <div class="wpb_wrapper">
           <p id="parrafonosotros">Nuestro hotel posee un sello distintivo de calidad y servicio, equipado con
-            todos los requerimientos que sus huÃ©spedes necesitan. Contamos con 106 habitaciones, todas de categorÃ­a
+            todos los requerimientos que sus huéspedes necesitan. Contamos con 106 habitaciones, todas de categoría
             superior de 26 y 40m<sup>2</sup>, de las cuales 53 habitaciones superior twin, 10 habitaciones superior
-            queen, 41 habitaciones superior king, 2 suite gobernador con balcÃ³n terraza. Todas las habitaciones estÃ¡n
-            equipadas para satisfacer todos los requerimientos de nuestros huÃ©spedes.</p>
+            queen, 41 habitaciones superior king, 2 suite gobernador con balcón terraza. Todas las habitaciones están
+            equipadas para satisfacer todos los requerimientos de nuestros huéspedes.</p>
         </div>
       </div>
     </div>
@@ -158,29 +134,6 @@
     </div>
     </div>
   </div>
-
-  <!-- The modal -->
-<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modalLabel">Flip-flop</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                A type of open-toed sandal.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-  <div th:replace="/components/footer"></div>
-  <div th:replace="/components/scripts"></div>
  
 </body>
 

@@ -1,0 +1,76 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a id="navbar-brand" href="#"><img src="../static/img/logo.png" th:src="@{/img/logo.png}" /></a>
+  <!-- /#logo-header -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+    <ul class="navbar-nav text-right">
+      <li class="nav-item active">
+        <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#nosotros">Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#servicios">Servicios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Habitaciones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" th:href="@{/tarifas}">Tarifas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" th:href="@{/fotos}">Fotos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" th:href="@{/}">Reservas</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Ver Mas
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">
+            <i class="material-icons icons-design">pin_drop</i> Ubicacion</a>
+          <a class="dropdown-item" href="#">
+            <i class="material-icons icons-design">thumb_up</i> Comentario</a>
+
+          <a class="dropdown-item" href="#contacto">
+            <i class="material-icons icons-design">contact_mail</i> Contacto</a>
+          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="dropdown-item" href="#" th:href="@{/modificaciones}">
+              <i class="material-icons icons-design">comment</i> Modificaciones</a>                 
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/login}"><i class="material-icons icons-design">perm_identity</i>
+            Login</a>
+        </li>
+        <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/registro}">Crear Cuenta</a>
+            </li>
+            <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mi Cuenta
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <p class="font-weight-normal " th:inline="text">
+                      <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
+                  <hr>
+                  <a class="dropdown-item" href="#"> Mis Datos</a>
+                  <form th:action="@{/logout}" method="post">
+                      <input id="btncerrarsesion"type="submit" value="Cerrar Sesion"/>
+                  </form>
+              </div>
+          </li> 
+      </ul>
+    </div>
+  </nav>
+
+  </html>

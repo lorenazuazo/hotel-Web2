@@ -29,14 +29,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http
         .authorizeRequests()
         .antMatchers(resources).permitAll()  
-        .antMatchers("/","/inicio","/registro","/tarifas","/fotos").permitAll()
+        .antMatchers("/","/home","/registro","/tarifas","/fotos").permitAll()
         .antMatchers("/modificaciones").access("hasRole('ADMIN')")	        
             .anyRequest().authenticated()
             .and()
         .formLogin()
             .loginPage("/login")
             .permitAll()
-            .defaultSuccessUrl("/inicio")
+            .defaultSuccessUrl("/home")
             .failureUrl("/login?error=true")
             //.successForwardUrl("/inicio")//puse esto de mas ver
             .usernameParameter("username")

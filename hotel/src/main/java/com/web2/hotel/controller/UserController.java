@@ -12,13 +12,7 @@ import com.web2.hotel.repositories.UserRepository;
 
 
 @Controller
-@RequestMapping("/")
 public class UserController {
-
-	@GetMapping(path= {"/inicio","/"})
-	public String index() {
-		return "index";
-	}
 	
 	@GetMapping("/login")
 	public String login () {

@@ -1,0 +1,21 @@
+drop database hotel;
+create DATABASE hotel;
+use hotel;
+
+
+
+insert into authority(id,authority)
+values(1,"ROLE_ADMIN"),
+(2,"ROLE_USER");
+ 
+
+insert into usuario(apellido,password,correo,dni,edad,enabled,nombre,sexo,telefono,username) 
+values("zuazo","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","loren@gmail.com","2548256",25,0b1,"lorena","F","24585652","lore"),
+("gaitan","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","fabio@gmail.com","25558256",25,0b1,"fabio","M","245869852","fabi"),
+("sanchez","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","sanch@gmail.com","25698256",25,0b1,"maria","F","24585652","maria");
+
+
+insert into authorities_users(usuario_id,authority_id)
+values(1,1),
+(2,2),
+(3,2);

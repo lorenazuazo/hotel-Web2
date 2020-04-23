@@ -29,108 +29,14 @@
   <title>Hotel Sierra Inn</title>
 </head>
 <body>
-     <!-- barra de navegacion -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a id="navbar-brand" href="#"><img src="../static/img/logo.png" th:src="@{/img/logo.png}" /></a>
-    <!-- /#logo-header -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-      <ul class="navbar-nav text-right">
-        <li class="nav-item active">
-          <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#nosotros">Nosotros</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#servicios">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Habitaciones</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/tarifas}">Tarifas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/}">Reservas</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Ver Mas
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#"><i class="material-icons icons-design">pin_drop</i> Ubicacion</a>
-            <a class="dropdown-item" href="#"><i class="material-icons icons-design">thumb_up</i> Opiniones</a>
-            <a class="dropdown-item" href="#contacto"><i class="material-icons icons-design">contact_mail</i> Contacto</a>
-            <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="dropdown-item" href="#" th:href="@{/modificaciones}">
-              <i class="material-icons icons-design">comment</i> Modificaciones</a>                 
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/login}"><i class="material-icons icons-design">perm_identity</i>
-            Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" th:href="@{/registro}">Crear Cuenta</a>
-        </li>
-        <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Mi Cuenta
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <p class="font-weight-normal " th:inline="text">
-                  <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
-              <hr>
-              <a class="dropdown-item" href="#"> Mis Datos</a>
-              <form th:action="@{/logout}" method="post">
-                  <input id="btncerrarsesion"type="submit" value="Cerrar Sesion"/>
-              </form>
-          </div>
-      </li> 
-      </ul>
-    </div>
-  </nav>
+  <!-- barra de navegacion -->
+  <div th:replace="/components/nav"></div>
 
-  <!-- Carrusel -->
-  <div class="containes" id="carousel">
-    <div class="row">
-      <div class="col-12">
-        <div class="carousel right">
-          <div class="indicator"></div>
-          <div class="wrap">
-              <ul>
-                  <li><img src="http://ppcdn.500px.org/23718959/f216a69d1cb7667436a1e6a33c7e4b2894d0fe18/4.jpg" /></li>
-                  <li><img src="http://ppcdn.500px.org/72233281/5e145f8f95427805045dbaf1ec2cf17bcb4b25b3/3.jpg" /></li>
-                  <li><img src="http://ppcdn.500px.org/72190239/1ac03d25646f92afd4d80ed8e6f2c1cfc78635b5/4.jpg" /></li>
-                  <li><img src="http://ppcdn.500px.org/58739696/b0c33312552e8581ef457720bb924f16421dcec8/3.jpg" /></li>
-                  <li><img src="http://ppcdn.500px.org/43028892/84b059f25810f07962ae46e63c44c625b2f9b9e6/2048.jpg" /></li>
-                  <li><img src="http://ppcdn.500px.org/33154839/a53aeaca99ee94a9803f445fd30163142f308829/3.jpg" /></li>
-                  <li><img src="http://ppcdn.500px.org/17981845/d1fdacaf5818108c248b05cd472329d314e732d3/3.jpg" /></li>
-              </ul>
-          </div>
-      </div>
-      </div>
-
-    </div>
-
-  </div>
 
 
     
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-  crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-  crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-  crossorigin="anonymous"></script>
-    
+  
+  <div th:replace="/components/footer"></div>
+  <div th:replace="/components/scripts"></div>  
 </body>
 </html>

@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <!-- iconos de materialize -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
     <link rel="stylesheet" href="../static/css/regisro-formuser.css" th:href="@{/css/regisro-formuser.css}">
-    
+    <link rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}">
     
     <!-- Script para mostrar y ocultar formularios -->
     <script>
@@ -25,7 +24,7 @@
     </script>
 
     <!-- logo en pestaña de navegacion -->
-  <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
+  <link rel="icon" type="imagen/png" href="../static/img/letra-h.png">
  
 
     <title>Modificaiones</title>
@@ -45,7 +44,7 @@
                 <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Servicios</a>
+                <a class="nav-link" href="" id="boton"  onclick="Mostrar()">Servicios</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Habitaciones</a>
@@ -54,7 +53,7 @@
                 <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Tarifas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="boton"  onclick="Mostrar('form-usuario')">Usuarios</a>
+                <a class="nav-link" href="" id="boton"  onclick="Mostrar('form-usuario')">Usuarios</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Reservas</a>
@@ -99,7 +98,7 @@
         <div class="section-center">
         <div class="container" id="advanced-search-form">
           <form >
-            <h2>Formulario de Registro</h2>
+            <h2>Modificar Usuarios</h2>
             <div class="form-group">
               <label for="nombre">Nombre</label>
               <input type="text" class="form-control" placeholder="Nombre" id="nombre">
@@ -134,10 +133,12 @@
     </div>
 </div>
 </div>
+
+<!-- formulario reservas -->
     
 
 
-<div th:replace="/components/scripts"></div>
 
+<div th:replace="/components/scripts"></div>
 </body>
 </html>

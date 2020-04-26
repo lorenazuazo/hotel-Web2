@@ -19,10 +19,10 @@
         <a class="nav-link" href="#servicios">Servicios</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Habitaciones</a>
+        <a class="nav-link" href="#" th:href="@{/tarifas}">Tarifas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#" th:href="@{/tarifas}">Tarifas</a>
+        <a class="nav-link" href="#" th:href="@{/habitaciones}">Habitaciones</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" th:href="@{/fotos}">Fotos</a>
@@ -36,9 +36,9 @@
           Ver Mas
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" th:href="@{/ubicacion}">
             <i class="material-icons icons-design">pin_drop</i> Ubicacion</a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" th:href="@{/ubicacion}">
             <i class="material-icons icons-design">thumb_up</i> Comentario</a>
 
           <a class="dropdown-item" href="#contacto">

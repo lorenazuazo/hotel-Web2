@@ -27,10 +27,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests()
-        .antMatchers(resources).permitAll()  
-        .antMatchers("/","/home","/registro","/tarifas","/fotos").permitAll()
-        .antMatchers("/modificaciones").access("hasRole('ADMIN')")	        
+        	.authorizeRequests()
+        	.antMatchers(resources).permitAll()  
+        	.antMatchers("/","/home","/registro","/tarifas","/fotos","/habitaciones","/ubicacion").permitAll()
+        	.antMatchers("/modificaciones").access("hasRole('ADMIN')")	        
             .anyRequest().authenticated()
             .and()
         .formLogin()
@@ -44,7 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .and()
         .logout()
             .permitAll()
-            .logoutSuccessUrl("/login?logout=true");
+            .logoutSuccessUrl("/login?logout=true")
+            .deleteCookies("JSESSIONID")
+            .and()
+            .rememberMe().key("uniqueAndSecret")
+            .tokenValiditySeconds(86400)
+            .rememberMeParameter("remember-me");
     }
     BCryptPasswordEncoder bCryptPasswordEncoder;
     //Crea el encriptador de contraseñas	

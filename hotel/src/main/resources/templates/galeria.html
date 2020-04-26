@@ -21,20 +21,48 @@
   
   <!-- link CSS -->
   <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
-   <link rel="stylesheet" href="../static/css/galeria.css" th:href="@{/css/galeria.css}">
-
   <!-- logo en pestaña de navegacion -->
   <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
 
   <title>Hotel Sierra Inn</title>
 </head>
-<body>
+<body style="background: #292B2C;">
   <!-- barra de navegacion -->
   <div th:replace="/components/nav"></div>
 
+<div class="container margen2">
+  <div class="row">
+    <div class="col-12 mb-3">
+       <div class="card-deck">
+         <div class="card">
+           <img src="../static/img/hab-cama-simple.jpg" th:src="@{/img/hab-cama-simple.jpg}" class="card-img-top fotos">
+          </div>
+          <div class="card">
+            <img src="../static/img/hab-rosa.jpg" th:src="@{/img/hab-rosa.jpg}" class="card-img-top fotos">
+          </div>
+          <div class="card">
+            <img src="../static/img/hab-rojajpg.jpg" th:src="@{/img/hab-rojajpg.jpg}" class="card-img-top fotos" >
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+       <div class="card-deck">
+         <div class="card">
+           <img src="../static/img/pileta-interna.jpg" th:src="@{/img/pileta-interna.jpg}" class="card-img-top fotos">
+          </div>
+          <div class="card">
+            <img src="../static/img/GYM.jpg" th:src="@{/img/GYM.jpg}" class="card-img-top fotos">
+          </div>
+          <div class="card">
+            <img src="../static/img/baño.jpg" th:src="@{/img/baño.jpg}" class="card-img-top fotos" >
+          </div>
+        </div>
+    </div>
+  </div>
 
-
-    
+</div>   
   
   <div th:replace="/components/footer"></div>
   <div th:replace="/components/scripts"></div>  

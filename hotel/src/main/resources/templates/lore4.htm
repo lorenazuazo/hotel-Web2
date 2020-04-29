@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
     <link rel="stylesheet" href="../static/css/regisro-formuser.css" th:href="@{/css/regisro-formuser.css}">
     <link rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}">
     
@@ -14,12 +13,12 @@
     <script>
         function Mostrar(id){
             document.getElementById(id).style.display = "block";
-            // document.getElementById("boton").value = "Ocultar";
+            document.getElementById("boton").value = "Ocultar";
         }
 
         function Ocultar(id){
             document.getElementById(id).style.display = "none";
-            // document.getElementById("boton").value = "Mostrar";
+            document.getElementById("boton").value = "Mostrar";
         }
     </script>
 
@@ -31,7 +30,7 @@
 </head>
 <body>
   <!-- barra de navegacion -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a id="navbar-brand" href="#"><img src="../static/img/logo.png" th:src="@{/img/logo.png}" /></a>
     <!-- /#logo-header -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -46,9 +45,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="" id="boton"  onclick="Mostrar()">Servicios</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Habitaciones</a>
-            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Habitaciones
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar('form-habitacion')">caracteristicas</a>
+                  <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar()">detalle por habitacion</a>
+              </div>
+          </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Tarifas</a>
             </li>
@@ -93,7 +99,7 @@
 </section>
 
     <!-- formulario usuario -->
-    <div class="margen" id="form-usuario" style="display: none;">
+    <div id="form-usuario" style="display: none;">
         <div id="registro" class="section">
         <div class="section-center">
         <div class="container" id="advanced-search-form">
@@ -137,8 +143,34 @@
 <!-- formulario reservas -->
     
 
+<!-- formularios de habitacioens -->
+<div class="modal-dialog" id="form-habitacion">
+  <div class="col-sm-12 ">
+      <div class="modal-content">
+          <div class="col-12">
+            <form>
+                <div class="form-group row">
+                  <label for="cantHabitaciones" class="col-sm-2 col-form-label">Cantidad de habitaciones</label>
+                  <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword">
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 
-<div th:replace="/components/scripts"></div>
 </body>
 </html>

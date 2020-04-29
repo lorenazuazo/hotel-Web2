@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="../static/css/habiatciones.css" th:href="@{/css/habiatciones.css}">
 
     <!-- logo en pestaña de navegacion -->
-    <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
+    <link rel="icon" type="imagen/png" href="../static/img//letra-h.png" th:href="@{/img/letra-h.png}">
 
     <title>Hotel Sierra Inn</title>
 </head>
@@ -35,21 +35,21 @@
 
   
     <div class="contenedor">
-        <img src="../static/img/hab-blanca.jpeg" th:src="@{/img/hab-blanca.jpeg}" />
+        <img src="../static/img/habitacion-flor.jpg" th:src="@{/img/habitacion-flor.jpg}" />
         <div class="centrado">Habitaciones</div>
     </div>
 
 
-    <div class="container">
+    <div class="container" th:object="${hab}">
         <div class="row">
 
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/hab-cama-simple.jpg}" src="../static/img/hab-cama-simple.jpg"
-                        class="card-img-top" alt="...">
+                        class="card-img-top">
                     <div class="card-body">
-                        <h5 th:text="lore" class="card-title">titulo</h5>
-                        <p th:text="vlvlvlvl" class="card-text">descripcion</p>
+                        <h5 th:text="${hab[0].clase}" class="card-title">titulo</h5>
+                        <p th:text="${hab[0].descripcion}" class="card-text">descripcion</p>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="container">
@@ -65,15 +65,14 @@
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Simple</h3>
+                            <h3 th:text="${hab[0].clase}" class="modal-title"></h3>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Dimensión:</strong>10 m2.</p>
-                            <p><strong>Camas:</strong>1 cama doble o twin.</p>
-                            <p>140cm x 190cm</p>
+                            <p><strong>Dimensión:</strong></p><p th:text="${hab[0].dimension}"></p>
+                            <p><strong>Camas:</strong></p><p th:text="${hab[0].camas}"></p> 
                         </div>
                         <div class="modal-footer">
-                            <button type="btn-sm" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -84,8 +83,8 @@
                     <img th:src="@{/img/hab-rojajpg.jpg}" src="../static/img/hab-rojajpg.jpg" class="card-img-top"
                         alt="...">
                     <div class="card-body">
-                        <h5 th:text="lore" class="card-title">titulo</h5>
-                        <p th:text="vlvlvlvl" class="card-text">descripcion</p>
+                        <h5 th:text="${hab[1].clase}" class="card-title">titulo</h5>
+                        <p th:text="${hab[1].descripcion}" class="card-text">descripcion</p>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="container">
@@ -101,15 +100,14 @@
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Quad</h3>
+                            <h3 th:text="${hab[1].clase}" class="modal-title"></h3>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Dimensión:</strong>10 m2.</p>
-                            <p><strong>Camas:</strong>1 cama doble o twin.</p>
-                            <p>2 cama simples.</p>
+                            <p><strong>Dimensión:</strong></p><p th:text="${hab[1].dimension}"></p>
+                            <p><strong>Camas:</strong></p><p th:text="${hab[1].camas}"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="btn-sm" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -119,8 +117,8 @@
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/hab-rosa.jpg}" src="../static/img/hab-rosa.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 th:text="lore" class="card-title">titulo</h5>
-                        <p th:text="vlvlvlvl" class="card-text">descripcion</p>
+                        <h5 th:text="${hab[2].clase}" class="card-title">titulo</h5>
+                        <p th:text="${hab[2].descripcion}" class="card-text">descripcion</p>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="container">
@@ -136,15 +134,14 @@
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Quad</h3>
+                            <h3 th:text="${hab[2].clase}" class="modal-title"></h3>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Dimensión:</strong>10 m2.</p>
-                            <p><strong>Camas:</strong>1 cama doble o twin.</p>
-                            <p>2 cama simples.</p>
+                            <p><strong>Dimensión:</strong></p><p th:text="${hab[2].dimension}"></p>
+                            <p><strong>Camas:</strong></p><p th:text="${hab[2].camas}"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="btn-sm" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -154,8 +151,8 @@
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/h-2camas.jpg}" src="../static/img/h-2camas.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 th:text="lore" class="card-title">titulo</h5>
-                        <p th:text="vlvlvlvl" class="card-text">descripcion</p>
+                        <h5 th:text="${hab[3].clase}" class="card-title">titulo</h5>
+                        <p th:text="${hab[3].descripcion}" class="card-text">descripcion</p>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="container">
@@ -171,15 +168,14 @@
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Quad</h3>
+                            <h3 th:text="${hab[3].clase}" class="modal-title"></h3>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Dimensión:</strong>10 m2.</p>
-                            <p><strong>Camas:</strong>1 cama doble o twin.</p>
-                            <p>2 cama simples.</p>
+                            <p><strong>Dimensión:</strong></p><p th:text="${hab[3].dimension}"></p>
+                            <p><strong>Camas:</strong></p><p th:text="${hab[3].camas}"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="btn-sm" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -190,8 +186,8 @@
                     <img th:src="@{/img/hab-Superior.jpg}" src="../static/img/hab-Superior.jpg" class="card-img-top"
                         alt="...">
                     <div class="card-body">
-                        <h5 th:text="lore" class="card-title">titulo</h5>
-                        <p th:text="vlvlvlvl" class="card-text">descripcion</p>
+                        <h5 th:text="${hab[4].clase}" class="card-title">titulo</h5>
+                        <p th:text="${hab[4].descripcion}" class="card-text">descripcion</p>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="container">
@@ -207,15 +203,14 @@
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Quad</h3>
+                            <h3 th:text="${hab[4].clase}" class="modal-title"></h3>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Dimensión:</strong>10 m2.</p>
-                            <p><strong>Camas:</strong>1 cama doble o twin.</p>
-                            <p>2 cama simples.</p>
+                            <p><strong>Dimensión:</strong></p></p><p th:text="${hab[4].dimension}"></p>
+                            <p><strong>Camas:</strong></p></p><p th:text="${hab[4].camas}"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="btn-sm" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -225,8 +220,8 @@
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/h-multiple.jpg}" src="../static/img/h-multiple.jpg" class="card-img-top">
                     <div class="card-body">
-                        <h5 th:text="lore" class="card-title">Quad</h5>
-                        <p th:text="vlvlvlvl" class="card-text">Habitacion para cuatro personas</p>
+                        <h5 th:text="${hab[5].clase}" class="card-title"></h5>
+                        <p th:text="${hab[5].descripcion}" class="card-text"></p>
                     </div>
                     <div class="card-footer text-muted">
                         <div class="container">
@@ -242,15 +237,14 @@
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Quad</h3>
+                            <h3 th:text="${hab[5].clase}" class="modal-title"></h3>
                         </div>
                         <div class="modal-body">
-                            <p><strong>Dimensión:</strong>10 m2.</p>
-                            <p><strong>Camas:</strong>1 cama doble o twin.</p>
-                            <p>2 cama simples.</p>
+                            <p><strong>Dimensión:</strong></p><p th:text="${hab[5].dimension}"></p>
+                            <p><strong>Camas:</strong></p><p th:text="${hab[5].camas}"></p>
                         </div>
                         <div class="modal-footer">
-                            <button type="btn-sm" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>

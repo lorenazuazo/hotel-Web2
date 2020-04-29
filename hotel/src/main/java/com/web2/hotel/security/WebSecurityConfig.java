@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http
         	.authorizeRequests()
         	.antMatchers(resources).permitAll()  
-        	.antMatchers("/","/home","/registro","/tarifas","/fotos","/habitaciones","/ubicacion").permitAll()
+        	.antMatchers("/","/home","/registro","/tarifas","/fotos","/habitaciones","/mensaje","/save-project","/create-project","/save-mensaje").permitAll()
         	.antMatchers("/modificaciones").access("hasRole('ADMIN')")	        
             .anyRequest().authenticated()
             .and()

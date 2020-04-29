@@ -82,7 +82,7 @@ public class Usuario implements Serializable {
 		}
 	
 	 @ManyToMany(fetch = FetchType.EAGER)
-	 @JoinTable(name="authorities_users",
+	 @JoinTable(name="users_authorities",
 	 joinColumns=@JoinColumn(name="usuario_id"),
 	 inverseJoinColumns=@JoinColumn(name="authority_id"))
 	 private Set<Authority> authority;
@@ -92,4 +92,10 @@ public class Usuario implements Serializable {
     @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario",cascade= CascadeType.ALL)
     private Set<Reservas> reservas;
 	
+    
+	 @ManyToMany(fetch = FetchType.LAZY)
+	 @JoinTable(name="users_mensajes",
+	 joinColumns=@JoinColumn(name="usuario_id"),
+	 inverseJoinColumns=@JoinColumn(name="mensaje_id"))
+	 private Set<Mensajes> mensaje;
 }

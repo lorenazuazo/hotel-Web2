@@ -32,9 +32,9 @@ public class CaracteristicasHabitacion {
 	/*union con tipoHabitacion*/
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-        name = "tipohabitacion_caracthabitacion", 
-        joinColumns = { @JoinColumn(name = "tipohabitacion_id")}, 
-        inverseJoinColumns = {@JoinColumn(name = "caracthabitacion_id")})
+        name = "caracthabitacion_tipohabitacion", 
+        joinColumns = { @JoinColumn(name = "caracthabitacion_id")}, 
+        inverseJoinColumns = {@JoinColumn(name = "tipohabitacion_id")})
     private Set<TipoHabitacion>tipohabit;
 
 

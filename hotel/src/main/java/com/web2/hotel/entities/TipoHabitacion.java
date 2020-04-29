@@ -32,6 +32,14 @@ public class TipoHabitacion implements Serializable{
 	@Column
 	@NotBlank
 	private String descripcion;
+
+	@Column
+	@NotBlank
+	private String dimension;
+	
+	@Column
+	@NotBlank
+	private String camas;	
 	
 	@Column(precision=10, scale=2)
 	@NotBlank

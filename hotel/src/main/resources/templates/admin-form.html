@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-     <!-- iconos de materialize -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/mystyle.css" th:href="@{/css/mystyle.css}">
-    <link rel="stylesheet" href="../static/css/regisro-formuser.css" th:href="@{/css/regisro-formuser.css}">
+     <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}">
     
     <!-- Script para mostrar y ocultar formularios -->
     <script>
@@ -32,7 +39,7 @@
 </head>
 <body>
   <!-- barra de navegacion -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a id="navbar-brand" href="#"><img src="../static/img/logo.png" th:src="@{/img/logo.png}" /></a>
     <!-- /#logo-header -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -47,8 +54,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Servicios</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Habitaciones</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Habitaciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar('form-habitacion')">caracteristicas</a>
+                    <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar()">detalle por habitacion</a>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Tarifas</a>
@@ -94,7 +108,7 @@
 </section>
 
     <!-- formulario usuario -->
-    <div class="margen" id="form-usuario" style="display: none;">
+    <div id="form-usuario" ><!-- style="display: none;"> -->
         <div id="registro" class="section">
         <div class="section-center">
         <div class="container" id="advanced-search-form">
@@ -124,16 +138,23 @@
               <label for="password">Password</label>
               <input type="password" class="form-control" placeholder="Password" id="age">
             </div>
-            <div class="clearfix"></div>
-            <button type="submit" class="btn btn-info btn-lg btn-responsive" id="search">
-              <span class="glyphicon glyphicon-search"></span> Registrar</button>
-              <Input type = "button" class="btn btn-info btn-lg btn-responsive" value = "Cerrar" onclick = "Ocultar('form-usuario')">
+            <div class="centrado">
+              <button type="submit" class="btn btn-info btn-sm btn-responsive" id="">Registrar</button>
+              <button type="submit" class="btn btn-info btn-sm btn-responsive" id="" onclick = "Ocultar('form-usuario')">
+              Cerrar</button>
+            </div>
+              
           </form>
         </div>
       </div>
     </div>
 </div>
 </div>
+
+<!-- formularios de habitacioens -->
+
+   
+
     
 
 

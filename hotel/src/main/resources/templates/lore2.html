@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--JQUERY-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- iconos de materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+
+    <!-- logo en pestaña de navegacion -->
+  <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+ 
+  <script type="text/javascript">
+      
+    function Mostrar(id){
+        document.getElementById(id).style.display = "block";
+        // document.getElementById("boton").value = "Ocultar";
+    }
+
+    function Ocultar(id){
+        document.getElementById(id).style.display = "none";
+        // document.getElementById("boton").value = "Mostrar";
+    }
+
+    // llama a dataTable y cambia lo que dice el data table
+    $(document).ready(function () {
+        $('#userList').DataTable({
+            "language": {
+                "decimal": "",
+                "emptyTable": "No hay datos disponibles en la tabla",
+                "info": "Mostrando _START_ de _END_ de _TOTAL_ entradas",
+                "infoEmpty": "No hay datos disponibles.",
+                "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrando _MENU_ entradas",
+                "loadingRecords": "Buscando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Registro no encontrado",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimmo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                }
+            }
+        });
+    });
+</script>
+</head>
+
+    <title>Modificaiones</title>
+</head>
+<body style="background: rgb(100, 99, 99);">
+<!-- barra de navegacion -->
+<div th:include="/components/navadmin" th:remove="tag"></div>
+
+  
+<section class="banner">
+</section> 
+<!-- formulario para modifiicar el usuario -->
+<div class="container" id="form-usuario" style="display: none;">
+    <div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+        <ul class="nav nav-tabs justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab"
+                    aria-controls="list" aria-selected="false">Lista</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form"
+                    aria-selected="true">Formulario</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Usuarios</h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:include="user-form/user-list.html" th:remove="tag"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Datos del Usuario</h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:include="user-form/user-form.html" th:remove="tag"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade show active">
+            <div class="card">
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-info btn-lg btn-responsive " id="btncerrar"
+                        onclick="Ocultar('form-usuario')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<div th:replace="/components/scripts"></div>
+</body>
+</html>

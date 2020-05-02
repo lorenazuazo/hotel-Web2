@@ -119,10 +119,9 @@
         </div>
         <div class="wpb_wrapper">
           <p id="parrafonosotros">Nuestro hotel posee un sello distintivo de calidad y servicio, equipado con
-            todos los requerimientos que sus huÃ©spedes necesitan. Contamos con 106 habitaciones, todas de categorÃ­a
-            superior de 26 y 40m<sup>2</sup>, de las cuales 53 habitaciones superior twin, 10 habitaciones superior
-            queen, 41 habitaciones superior king, 2 suite gobernador con balcÃ³n terraza. Todas las habitaciones estÃ¡n
-            equipadas para satisfacer todos los requerimientos de nuestros huÃ©spedes.</p>
+            todos los requerimientos que sus huespedes necesitan. Contamos con 100 habitaciones, todas de categori­a
+            superior de 10 y 40m<sup>2</sup>, de las cuales 30 habitaciones Individual, 20 habitaciones Junior Suite, 20 Doble, 10 Superior, 10 habitaciones con Estudio, 10 Quad con balcon terraza. Todas las habitaciones estan
+            equipadas para satisfacer todos los requerimientos de nuestros huespedes.</p>
         </div>
       </div>
     </div>
@@ -142,7 +141,7 @@
       <div class="modal-dialog text-center mt-3">
         <div class="col-sm-12 main-section">
             <div class="modal-content">
-                <form class="col-12 mt-3" th:action="@{/login}" method="post">
+                <form class="col-12 mt-3" th:object="${email}" th:action="@{/save-correo}" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
@@ -150,9 +149,10 @@
                             </span>
                         </div>
                         <input type="email" class="form-control" placeholder="Email" aria-label="uemail"
-                            aria-describedby="basic-addon1" aria-required="true" name="email">
+                            aria-describedby="basic-addon1" aria-required="true" name="correo">
                     </div>
                     <button type="submit" class="btn btn-primary ">Enviar</button>
+                    <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error Message</div><!-- lo que pone es lo que tiene esta variable ${formErrorMessage} -->
                 </form>
             </div>
         </div>

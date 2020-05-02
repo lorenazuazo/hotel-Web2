@@ -3,100 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- iconos de materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="../static/css/regisro-formuser.css" th:href="@{/css/regisro-formuser.css}">
-    <link rel="stylesheet" href="../static/css/admin.css" th:href="@{/css/admin.css}">
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}">
     
     <!-- Script para mostrar y ocultar formularios -->
     <script>
         function Mostrar(id){
             document.getElementById(id).style.display = "block";
-            document.getElementById("boton").value = "Ocultar";
+            // document.getElementById("boton").value = "Ocultar";
         }
 
         function Ocultar(id){
             document.getElementById(id).style.display = "none";
-            document.getElementById("boton").value = "Mostrar";
+            // document.getElementById("boton").value = "Mostrar";
         }
     </script>
 
     <!-- logo en pestaña de navegacion -->
-  <link rel="icon" type="imagen/png" href="../static/img/letra-h.png">
+  <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
  
 
     <title>Modificaiones</title>
 </head>
 <body>
-  <!-- barra de navegacion -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a id="navbar-brand" href="#"><img src="../static/img/logo.png" th:src="@{/img/logo.png}" /></a>
-    <!-- /#logo-header -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-        <ul class="navbar-nav text-right">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="" id="boton"  onclick="Mostrar()">Servicios</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Habitaciones
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar('form-habitacion')">caracteristicas</a>
-                  <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar()">detalle por habitacion</a>
-              </div>
-          </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Tarifas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="" id="boton"  onclick="Mostrar('form-usuario')">Usuarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="boton"  onclick="Mostrar()">Reservas</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Ver Mas
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar()"> Roles y Permisos</a>
-                    <a class="dropdown-item" href="#" id="boton"  onclick="Mostrar()"> Datos del hotel</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Mi Cuenta
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <p class="font-weight-normal " th:inline="text">
-                        <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
-                    <hr>
-                    <a class="dropdown-item" href="#"> Mis Datos</a>
-                    <form th:action="@{/logout}" method="post">
-                        <input id="btncerrarsesion" type="submit" value="Cerrar Sesion"/>
-                    </form>
-                </div>
-            </li> 
-                </form>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div th:replace="/components/navadmin"></div>
+
   
 <section class="banner">
-</section>
+</section> 
 
     <!-- formulario usuario -->
     <div id="form-usuario" style="display: none;">
@@ -104,7 +50,7 @@
         <div class="section-center">
         <div class="container" id="advanced-search-form">
           <form >
-            <h2>Modificar Usuarios</h2>
+            <h2>Formulario de Registro</h2>
             <div class="form-group">
               <label for="nombre">Nombre</label>
               <input type="text" class="form-control" placeholder="Nombre" id="nombre">
@@ -129,10 +75,11 @@
               <label for="password">Password</label>
               <input type="password" class="form-control" placeholder="Password" id="age">
             </div>
-            <div class="clearfix"></div>
-            <button type="submit" class="btn btn-info btn-lg btn-responsive" id="search">
-              <span class="glyphicon glyphicon-search"></span> Registrar</button>
-              <Input type = "button" class="btn btn-info btn-lg btn-responsive" value = "Cerrar" onclick = "Ocultar('form-usuario')">
+            <div class="centrado">
+              <button type="submit" class="btn btn-info btn-sm btn-responsive" id="">Registrar</button>
+              <button type="submit" class="btn btn-info btn-sm btn-responsive" id="" onclick = "Ocultar('form-usuario')">
+              Cerrar</button>
+            </div>
           </form>
         </div>
       </div>
@@ -140,37 +87,11 @@
 </div>
 </div>
 
-<!-- formulario reservas -->
-    
-
 <!-- formularios de habitacioens -->
-<div class="modal-dialog" id="form-habitacion">
-  <div class="col-sm-12 ">
-      <div class="modal-content">
-          <div class="col-12">
-            <form>
-                <div class="form-group row">
-                  <label for="cantHabitaciones" class="col-sm-2 col-form-label">Cantidad de habitaciones</label>
-                  <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
-                  </div>
-                </div>
-              </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   
 
-
+    
+<div th:replace="/components/scripts"></div>
 </body>
 </html>

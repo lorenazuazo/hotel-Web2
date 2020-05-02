@@ -58,6 +58,4 @@ public class Mensajes implements Serializable{
 	@ManyToMany(mappedBy="mensaje")
 	private Set<Usuario>usuario;
 
-	@ManyToMany(mappedBy="mensajeSimple")
-	private Set<UsuarioSimple>usuarioSimple;
 }

@@ -49,9 +49,9 @@ public class Usuario implements Serializable {
 	@Email
 	protected String correo;
 	
-	 @PrePersist
-	 @PreUpdate
-	 protected void prepareData(){this.correo = correo == null ? null : correo.toLowerCase();}
+	@PrePersist
+	@PreUpdate
+	protected void prepareData(){this.correo = correo == null ? null : correo.toLowerCase();}
 
 	@Column
 	@NotBlank

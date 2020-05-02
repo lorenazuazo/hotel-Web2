@@ -1,0 +1,51 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+
+<!-- barra de navegacion -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id="navbar-brand" href="#"><img src="../static/img/logo.png" th:src="@{/img/logo.png}" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+        <ul class="navbar-nav text-right">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Servicios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Habitaciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Tarifas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="boton" onclick="Mostrar('form-usuario')">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Reservas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Permisos</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mi Cuenta
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <p class="font-weight-normal " th:inline="text">
+                        <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
+                      <hr>
+                      <a class="dropdown-item" href="#"> Mis Datos</a>
+                      <form th:action="@{/logout}" method="post">
+                        <input id="btncerrarsesion" type="submit" value="Cerrar Sesion"/> 
+                      </form>
+                  </div>
+              </li> 
+            </ul>
+        </div>
+    </nav>
+</html>

@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         	.antMatchers(resources).permitAll()  
         	.antMatchers("/","/home","/registro","/tarifas","/fotos",
         			     "/habitaciones","/mensaje","/save-correo",
-        			     "/save-mensaje","/modificaciones").permitAll()
+        			     "/save-mensaje","/mis-datos").permitAll()
         	.antMatchers("/modificaciones").access("hasRole('ADMIN')")	        
             .anyRequest().authenticated()
             .and()

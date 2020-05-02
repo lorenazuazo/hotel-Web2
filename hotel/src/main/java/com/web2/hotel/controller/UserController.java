@@ -15,5 +15,10 @@ public class UserController {
 	public String mostratFormRegistro() {
 		return "registro-formuser";
 	}
+	
+	@GetMapping("/mis-datos")
+	public String setDatos() {
+		return "modif-datos";
+	}
 
 }

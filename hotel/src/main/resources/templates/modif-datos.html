@@ -18,34 +18,35 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Nuestro css-->
-    <link rel="stylesheet" type="text/css" href="../static/css/admin.css" th:href="@{/css/admin.css}">
+     <!-- link CSS -->
+    <link rel="stylesheet" href="/static/css/mystyle.css" th:href="@{/css/mystyle.css}">
     <link rel="stylesheet" type="text/css" href="static/css/user-form.css" th:href="@{/css/user-form.css}">
+    
 
     <!-- logo en pestaña de navegacion -->
    <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
-   
-    <!-- DATA TABLE -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.ss">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-
-    <!-- mi javascript -->
-    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-
-    <title>Modificaiones</title>
 </head>
+<body>
+    <!-- barra de navegacion -->
+    <div th:replace="/components/nav" th:remove="tag"></div>
+    <!-- imagen de fondo -->
+    <section class="banner"></section> 
 
-<body style="background: rgb(100, 99, 99);">
-<!-- barra de navegacion -->
-<div th:replace="/components/navadmin" th:remove="tag"></div>
-
-<!-- imagen de fondo -->
-<section class="banner"></section> 
-
-<!-- formulario para modifiicar el usuario -->
-<div th:replace="/user-form/user-view" th:remove="tag"></div>
-
-
+    <!-- formulario para modificar usuario -->
+    <div class="container margen2" id="form-usuario">
+		<div class="mx-auto col-sm-8 main-section">
+			<div class="tab-content">
+					<div class="card">
+						<div class="card-header">
+							<h4>Mis datos</h4>
+						</div>
+						<div class="card-body">
+							<div th:include="user-form/user-form.html" th:remove="tag"></div>
+						</div>
+					</div>
+			
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -27,8 +27,7 @@
   <div th:replace="/components/nav"></div>
 
   <!-- imagen de fondo -->
-  <section class="banner">
-  </section> 
+  <section class="banner"></section> 
 
   <!-- formulario de registro -->
   
@@ -39,31 +38,31 @@
       <form>
         <div class="form-group">
           <label for="nombre">Nombre</label>
-          <input type="text" class="form-control" placeholder="Nombre" id="nombre">
+          <input type="text" class="form-control" required placeholder="Nombre" id="nombre">
         </div>
         <div class="form-group">
           <label for="apellido">Apellido</label>
-          <input type="text" class="form-control" placeholder="Apellido" id="apellido">
+          <input type="text" class="form-control" required placeholder="Apellido" id="apellido">
         </div>
         <div class="form-group">
-          <label for="number">Numero de Telefono</label>
+          <label for="number">Telefono</label>
           <input type="text" class="form-control" placeholder="Telefono" id="numero de telefono">
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control" placeholder="Email" id="email">
+          <input type="email" class="form-control" required placeholder="Email" id="email">
         </div>
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" placeholder="Username" id="username">
+          <input type="text" class="form-control" required placeholder="Username" id="username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" placeholder="Password" id="age">
+          <input type="password" class="form-control" required placeholder="Password" id="age">
         </div>
-        <div class="clearfix"></div>
-        <button type="submit" class="btn btn-info btn-lg btn-responsive" id="search">
-          <span class="glyphicon glyphicon-search"></span> Registrar</button>
+        <div class="col-lg-12 text-center">
+          <input type="button" class="btn btn-primary btnform" value="Aceptar">
+      </div>
       </form>
     </div>
   </div>

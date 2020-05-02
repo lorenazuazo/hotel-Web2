@@ -55,7 +55,7 @@
               <a class="nav-link" href="#" th:href="@{/registro}">Crear Cuenta</a>
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Mi Cuenta
               </a>
@@ -63,7 +63,7 @@
                   <p class="font-weight-normal " th:inline="text">
                       <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
                   <hr>
-                  <a class="dropdown-item" href="#"> Mis Datos</a>
+                  <a class="dropdown-item" th:href="@{/mis-datos}"> Mis Datos</a>
                   <form th:action="@{/logout}" method="post">
                       <input id="btncerrarsesion"type="submit" value="Cerrar Sesion"/>
                   </form>

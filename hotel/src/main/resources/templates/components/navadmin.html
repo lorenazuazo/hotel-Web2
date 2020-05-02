@@ -39,7 +39,7 @@
                     <p class="font-weight-normal " th:inline="text">
                         <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
                       <hr>
-                      <a class="dropdown-item" href="#"> Mis Datos</a>
+                      <a class="dropdown-item" th:href="@{/mis-datos}"> Mis Datos</a>
                       <form th:action="@{/logout}" method="post">
                         <input id="btncerrarsesion" type="submit" value="Cerrar Sesion"/> 
                       </form>

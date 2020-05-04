@@ -13,13 +13,13 @@ $(document).ready(function () {
     $('#userList').DataTable({
         "language": {
             "decimal": "",
-            "emptyTable": "No hay datos disponibles en la tabla",
-            "info": "Mostrando _START_ de _END_ de _TOTAL_ entradas",
+            "emptyTable": "No hay datos disponibles",
+            "info": "Mostrando _TOTAL_ registros",
             "infoEmpty": "No hay datos disponibles.",
-            "infoFiltered": "(filtrado de _MAX_ entradas totales)",
+            "infoFiltered": "(_MAX_ registros totales)",
             "infoPostFix": "",
             "thousands": ",",
-            "lengthMenu": "Mostrando _MENU_ entradas",
+            "lengthMenu": "_MENU_ registros",
             "loadingRecords": "Buscando...",
             "processing": "Procesando...",
             "search": "Buscar:",

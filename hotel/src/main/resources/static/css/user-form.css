@@ -37,18 +37,22 @@ label{
 #btncerrar:hover{
     color: black !important;
 }
-.btnform{
+.btnformuser{
     background-color: rgb(168, 143, 28) !important; 
 }
 
-.btnform:hover{
+.btnformuser:hover{
     color: black !important;
 }
 
 .page-item.active .page-link {
     color: white !important;
-    background-color: rgb(168, 143, 28) !important;
-    border-color:  rgb(168, 143, 28) !important;
+    background-color: rgb(160, 159, 153) !important;
+    border-color:   rgb(160, 159, 153) !important;
+}
+a svg{
+    
+    color: rgb(112, 108, 108) !important;
 }
 
 

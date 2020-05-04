@@ -20,11 +20,6 @@ public class AdministratorController {
 		return "index";
 	}
 	
-	@GetMapping("/modificaciones")
-	public String modificarDatosHotel() {
-		return "admin-form";
-	}
-	
 	@GetMapping("/fotos")
 	public String mostrarGaleria() {
 		return "galeria";

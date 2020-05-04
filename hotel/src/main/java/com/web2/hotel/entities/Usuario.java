@@ -38,11 +38,7 @@ public class Usuario implements Serializable {
 	
 	@Column(length=50)
 	@NotBlank
-	protected String apellido;
-	
-	@Column(length=1)
-	@Enumerated(EnumType.STRING)
-	protected Genero sexo;		
+	protected String apellido;		
 
 	@Column
 	@NotBlank
@@ -56,10 +52,6 @@ public class Usuario implements Serializable {
 	@Column
 	@NotBlank
 	private String dni;
-	
-	@Column
-	@NotBlank
-	private int edad;
 
 	@Column
 	@NotBlank
@@ -73,13 +65,9 @@ public class Usuario implements Serializable {
 	@NotBlank
 	private String password;
 	
-	@Column
-	@NotBlank
-	private boolean enabled;
+	@Transient 
+	private String confirmPassword;
 	
-	 protected enum Genero {
-			F,M
-		}
 	
 	 @ManyToMany(fetch = FetchType.EAGER)
 	 @JoinTable(name="users_authorities",

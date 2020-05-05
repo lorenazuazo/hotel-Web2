@@ -15,13 +15,6 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepository usuarioRepo;
-	
-	
-	@Override
-	public String getUsuarioLogueado() {
-		return null;
-	}
-
 
 	@Override
 	public Iterable<Usuario> getAlluser() {
@@ -51,6 +44,23 @@ public class UserServiceImpl implements UserService{
 		}
 		return user;
 	}
+
+
+	@Override
+	public Usuario getUserById(long id) throws Exception {
+		Usuario user=usuarioRepo.findById(id).orElseThrow(()->new Exception("No existe Usuario"));
+		return user;
+	}
+
+	@Override
+	public Optional<Usuario> getUserByUsername(String username) {
+		Optional<Usuario> user= usuarioRepo.findByUsername(username);
+		return user;
+	}
+
+
+
+
 
 
 }

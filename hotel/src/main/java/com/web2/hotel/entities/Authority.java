@@ -1,7 +1,7 @@
 package com.web2.hotel.entities;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,13 +19,7 @@ public class Authority {
 	private Long id;
 	
 	@Column
+	@NotBlank
 	private String authority;
 	
-	public String getAuthority() {
-		return authority;
-	}
-
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
 }

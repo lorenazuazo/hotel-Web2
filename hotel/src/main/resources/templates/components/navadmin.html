@@ -36,14 +36,13 @@
                     Mi Cuenta
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <p class="font-weight-normal " th:inline="text">
-                        <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
-                      <hr>
-                      <a class="dropdown-item" th:href="@{/mis-datos}"> Mis Datos</a>
-                      <form th:action="@{/logout}" method="post">
+                    <p class="font-weight-normal " th:inline="text"><i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
+                    <hr>
+                    <a class="dropdown-item" th:href="@{'/mis-datos/'+ ${#httpServletRequest.remoteUser}}">Mis Datos</a>
+                    <form th:action="@{/logout}" method="post">
                         <input id="btncerrarsesion" type="submit" value="Cerrar Sesion"/> 
-                      </form>
-                  </div>
+                    </form>                 
+                </div>
               </li> 
             </ul>
         </div>

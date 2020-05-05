@@ -8,10 +8,10 @@ values(1,"ROLE_ADMIN"),
 (2,"ROLE_USER");
  
 
-insert into usuario(apellido,password,correo,dni,edad,enabled,nombre,sexo,telefono,username) 
-values("zuazo","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","loren@gmail.com","2548256",25,0b1,"lorena","F","24585652","lore"),
-("gaitan","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","fabio@gmail.com","25558256",25,0b1,"fabio","M","245869852","fabi"),
-("sanchez","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","sanch@gmail.com","25698256",25,0b1,"maria","F","24585652","maria");
+insert into usuario(apellido,password,correo,dni,nombre,telefono,username) 
+values("zuazo","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","loren@gmail.com","2548256","lorena","24585652","lore"),
+("gaitan","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","fabio@gmail.com","25558256","fabio","245869852","fabi"),
+("sanchez","$2a$04$PcsqHPhqPiPaZd9vVW.Ahu6exv7fiiiiJm2/g/UnwuhaufIRKEJom","sanch@gmail.com","25698256","maria","24585652","maria");
 
 
 insert into users_authorities(usuario_id,authority_id)
@@ -19,13 +19,14 @@ values(1,1),
 (2,2),
 (3,2);
 
+
 insert into tipo_habitacion(clase,descripcion,tarifa,dimension,camas)
-values("individual","habitacion para 1 o 2 personas",2500,"10m cuad","1 doble o 2 simples"),
-("junior suite","habitacion hasta 3 personas",2900,"19m cuad","1 queen o 1 simple"),
-("doble","habitacion para 1 o 2 personas",2900,"10m cuad","1 doble o 2 simples"),
-("superior","habitacion hasta 3 personas",3000,"15m cuad","1 doble o 1 simples"),
-("estudio","habitacion hasta 3 personas c/estudio",3500,"30m cuad","1 doble o 1 queen"),
-("quad","habitacion hasta 4 personas",3900,"30m cuad","1 doble o 1 queen");
+values("Individual","habitacion para 1 o 2 personas",2500,"10m cuad","1 doble o 2 simples"),
+("Junior suite","habitacion hasta 3 personas",2900,"19m cuad","1 queen o 1 simple"),
+("Doble","habitacion para 1 o 2 personas",2900,"10m cuad","1 doble o 2 simples"),
+("Superior","habitacion hasta 3 personas",3000,"15m cuad","1 doble o 1 simples"),
+("Estudio","habitacion hasta 3 personas c/estudio",3500,"30m cuad","1 doble o 1 queen"),
+("Quad","habitacion hasta 4 personas",3900,"30m cuad","1 doble o 1 queen");
 
 insert into caracteristicashabitacion(detalle)
 values("aire acondicionado"),

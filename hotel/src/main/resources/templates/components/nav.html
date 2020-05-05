@@ -60,17 +60,13 @@
                   Mi Cuenta
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <p class="font-weight-normal " th:inline="text">
-                      <i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
-                  <hr>
-                  <form th:action="@{/mis-datos}" method="get" th:object="${user}">
-                    <input id="btncerrarsesion"type="submit" value="Mis datos" th:name="${#httpServletRequest.remoteUser}"/>
-                  </form>
-                  <!-- <a class="dropdown-item" th:href="@{/mis-datos}" name="${#httpServletRequest.remoteUser}"> Mis Datos</a> -->
-                  <form th:action="@{/logout}" method="post">
-                      <input id="btncerrarsesion"type="submit" value="Cerrar Sesion"/>
-                  </form>
-              </div>
+                <p class="font-weight-normal " th:inline="text"><i class="material-icons icons-design">perm_identity</i> [[${#httpServletRequest.remoteUser}]]!</p>
+                <hr>
+                <a class="dropdown-item" th:href="@{'/mis-datos/'+ ${#httpServletRequest.remoteUser}}">Mis Datos</a>
+                <form th:action="@{/logout}" method="post">
+                    <input id="btncerrarsesion" type="submit" value="Cerrar Sesion"/> 
+                </form>                 
+            </div>
           </li> 
       </ul>
     </div>

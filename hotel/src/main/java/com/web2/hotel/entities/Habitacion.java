@@ -36,7 +36,7 @@ public class Habitacion implements Serializable{
 	@Column
 	private long id;
 	
-	@Column(length=16)
+	@Column
 	@NotBlank
 	private String numerohabitacion;
 	

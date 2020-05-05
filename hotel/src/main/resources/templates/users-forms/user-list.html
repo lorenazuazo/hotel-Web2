@@ -18,8 +18,8 @@
 			<td th:text="${usuario.correo}"></td>
             <td th:text="${usuario.username}"></td>
 			<td>
-				<a href="#" th:href="@{'/editUser/'+ ${usuario.id}}"><i class="fas fa-edit"></i></a>
-				<a href="#" th:onclick="'javascript:confirmDelete(\''+ ${usuario.id} +'\');'"><i class="fas fa-user-times"></i></a>
+				<a title="editar" href="#" th:href="@{'/editUser/'+ ${usuario.id}}"><i class="fas fa-edit"></i></a>
+				<a title="eliminar" href="#" th:onclick="'javascript:confirmDelete(\''+ ${usuario.id} +'\');'"><i class="fas fa-user-times"></i></a>
 			</td>
 		</tr>
 		</tbody>

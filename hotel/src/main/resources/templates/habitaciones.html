@@ -35,7 +35,7 @@
 
   
     <div class="contenedor">
-        <img src="../static/img/habitacion-flor.jpg" th:src="@{/img/habitacion-flor.jpg}" />
+        <img src="../static/img/habitacion-flor.jpg" th:src="@{/img/habitacion-flor.jpg}" alt="habitacion con flores"/>
         <div class="centrado">Habitaciones</div>
     </div>
 
@@ -46,7 +46,7 @@
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/hab-cama-simple.jpg}" src="../static/img/hab-cama-simple.jpg"
-                        class="card-img-top">
+                        class="card-img-top" alt="${hab[0].clase}">
                     <div class="card-body">
                         <h5 th:text="${hab[0].clase}" class="card-title">titulo</h5>
                         <p th:text="${hab[0].descripcion}" class="card-text">descripcion</p>
@@ -81,7 +81,7 @@
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/hab-rojajpg.jpg}" src="../static/img/hab-rojajpg.jpg" class="card-img-top"
-                        alt="...">
+                        alt="${hab[1].clase}">
                     <div class="card-body">
                         <h5 th:text="${hab[1].clase}" class="card-title">titulo</h5>
                         <p th:text="${hab[1].descripcion}" class="card-text">descripcion</p>
@@ -115,7 +115,7 @@
 
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
-                    <img th:src="@{/img/hab-rosa.jpg}" src="../static/img/hab-rosa.jpg" class="card-img-top" alt="...">
+                    <img th:src="@{/img/hab-rosa.jpg}" src="../static/img/hab-rosa.jpg" class="card-img-top" alt="${hab[2].clase}">
                     <div class="card-body">
                         <h5 th:text="${hab[2].clase}" class="card-title">titulo</h5>
                         <p th:text="${hab[2].descripcion}" class="card-text">descripcion</p>
@@ -149,7 +149,7 @@
 
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
-                    <img th:src="@{/img/h-2camas.jpg}" src="../static/img/h-2camas.jpg" class="card-img-top" alt="...">
+                    <img th:src="@{/img/h-2camas.jpg}" src="../static/img/h-2camas.jpg" class="card-img-top" alt="${hab[3].clase}">
                     <div class="card-body">
                         <h5 th:text="${hab[3].clase}" class="card-title">titulo</h5>
                         <p th:text="${hab[3].descripcion}" class="card-text">descripcion</p>
@@ -184,7 +184,7 @@
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
                     <img th:src="@{/img/hab-Superior.jpg}" src="../static/img/hab-Superior.jpg" class="card-img-top"
-                        alt="...">
+                        alt="${hab[4].clase}">
                     <div class="card-body">
                         <h5 th:text="${hab[4].clase}" class="card-title">titulo</h5>
                         <p th:text="${hab[4].descripcion}" class="card-text">descripcion</p>
@@ -218,7 +218,7 @@
 
             <div class="col-4 mt-3 mb-3">
                 <div class="card" style="width: 18rem;">
-                    <img th:src="@{/img/h-multiple.jpg}" src="../static/img/h-multiple.jpg" class="card-img-top">
+                    <img th:src="@{/img/h-multiple.jpg}" src="../static/img/h-multiple.jpg" class="card-img-top" alt="${hab[5].clase}">
                     <div class="card-body">
                         <h5 th:text="${hab[5].clase}" class="card-title"></h5>
                         <p th:text="${hab[5].descripcion}" class="card-text"></p>

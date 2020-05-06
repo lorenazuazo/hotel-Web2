@@ -97,4 +97,9 @@ public class UserController {
 		return "modif-datos";
 	}
 
+	@PostMapping("/mis-datos")
+	public String setDatos(Model model,@Valid @ModelAttribute("userLogin")Usuario user, BindingResult result) {
+		
+		return "modif-datos";
+	}
 }

@@ -1,11 +1,9 @@
 function Mostrar(id){
     document.getElementById(id).style.display = "block";
-    // document.getElementById("boton").value = "Ocultar";
 }
 
 function Ocultar(id){
     document.getElementById(id).style.display = "none";
-    // document.getElementById("boton").value = "Mostrar";
 }
 
 // llama a dataTable y cambia lo que dice el data table

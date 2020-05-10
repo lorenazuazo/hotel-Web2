@@ -1,4 +1,4 @@
-<form id="userForm" th:object="${userForm}" method="post" th:action="${editMode}?@{/editUser}:@{/crearUser}" autocomplete="off">
+<form id="userForm" th:object="${userForm}" method="post" th:action="${editMode}?@{/modificaciones/editUser}:@{/modificaciones/crearUser}" autocomplete="off">
     <!--Es necesario para poder pasar la validacion del Model porque en entidad la puse como NotBlank
     va a permanecer oculto hasta que editMode sea verdadero, value="xxxx" lo agrego para que cundo inspeccione
     la pagina no me muestre los valores de la contraseña-->

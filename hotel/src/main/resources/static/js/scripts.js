@@ -1,10 +1,15 @@
 function Mostrar(id){
     document.getElementById(id).style.display = "block";
+    if(id=='form-usuario'){
+        var activar='form-usuario';
+    }
 }
 
 function Ocultar(id){
     document.getElementById(id).style.display = "none";
+
 }
+
 
 // llama a dataTable y cambia lo que dice el data table
 $(document).ready(function () {

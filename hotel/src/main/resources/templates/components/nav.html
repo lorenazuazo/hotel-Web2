@@ -43,7 +43,7 @@
 
           <a class="dropdown-item" href="#contacto">
             <i class="material-icons icons-design">contact_mail</i> Contacto</a>
-          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="dropdown-item" href="#" th:href="@{/modificaciones}">
+          <a th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="dropdown-item" href="#" th:href="@{/modificaciones/}">
               <i class="material-icons icons-design">comment</i> Modificaciones</a>                 
           </div>
         </li>

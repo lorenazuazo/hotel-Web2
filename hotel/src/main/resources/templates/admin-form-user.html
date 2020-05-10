@@ -42,7 +42,10 @@
 <section class="banner"></section> 
 
 <!-- barra de navegacion de modificaciones -->
-<div th:replace="/components/navadmin"></div>>
+<div th:replace="/components/navadmin"></div>
+
+<!-- formulario y lista para modificar el usuario -->
+<div th:replace="/users-forms/user-view"th:remove="tag"></div>
 
 </body>
 </html>

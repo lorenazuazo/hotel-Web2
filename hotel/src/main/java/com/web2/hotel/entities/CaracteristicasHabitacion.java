@@ -1,5 +1,6 @@
 package com.web2.hotel.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -11,12 +12,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @SuppressWarnings("serial")
+@Entity
 @Table(name="caracteristicashabitacion")
-@Data @AllArgsConstructor @NoArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
-public class CaracteristicasHabitacion {
+public class CaracteristicasHabitacion implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
@@ -28,14 +31,4 @@ public class CaracteristicasHabitacion {
 	@NotBlank
 	private String detalle;
 	
-	
-	/*union con tipoHabitacion*/
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-        name = "caracthabitacion_tipohabitacion", 
-        joinColumns = { @JoinColumn(name = "caracthabitacion_id")}, 
-        inverseJoinColumns = {@JoinColumn(name = "tipohabitacion_id")})
-    private Set<TipoHabitacion>tipohabit;
-
-
 }

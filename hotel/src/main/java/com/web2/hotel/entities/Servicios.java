@@ -34,9 +34,7 @@ public class Servicios implements Serializable{
 	@NotBlank
 	private String descripcionServicio;
 	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float tarifa;
+	
 	
 	@ManyToMany(cascade = {CascadeType.ALL})
 	@JoinTable(

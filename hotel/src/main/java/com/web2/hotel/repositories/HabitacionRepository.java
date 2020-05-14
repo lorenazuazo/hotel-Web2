@@ -7,5 +7,6 @@ import com.web2.hotel.entities.Habitacion;
 
 @Repository
 public interface HabitacionRepository extends CrudRepository<Habitacion, Long>{
-	
+
+
 }

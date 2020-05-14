@@ -11,19 +11,22 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @SuppressWarnings("serial")
-@Table(name="tipoHabitacion")
-@Data @AllArgsConstructor @NoArgsConstructor
-
+@Table(name="Tipohabitacion")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TipoHabitacion implements Serializable{
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native",strategy="native")
 	@Column
-	private long id;
+	private long id_tipo;
 	
 	@Column
 	@NotBlank
@@ -39,20 +42,9 @@ public class TipoHabitacion implements Serializable{
 	
 	@Column
 	@NotBlank
-	private String camas;	
+	private String camas;
 	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float tarifa;
-	
-	/*union con Habitacion*/
-	@OneToMany(fetch=FetchType.LAZY,
-			mappedBy="tipoHabitacion",
-			cascade=CascadeType.ALL)
-	private Set<Habitacion> habitacion;
-	
-	/*union con CaracteristicasHabitacion*/
-	@ManyToMany(mappedBy="tipohabit")
-	private Set<CaracteristicasHabitacion>caractHabitacion;
+	 @OneToMany(cascade = CascadeType.ALL)
+	 private Set<Habitacion> habitacion;
 
 }

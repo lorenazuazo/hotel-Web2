@@ -21,12 +21,14 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@SuppressWarnings("serial")
 @Table(name="usuario")
 @Data
 @NoArgsConstructor @AllArgsConstructor
 
 public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native",strategy="native")
@@ -76,7 +78,6 @@ public class Usuario implements Serializable {
 	 inverseJoinColumns=@JoinColumn(name="authority_id"))
 	 private Set<Authority> authority;
 	 
-
 	
     @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario",cascade= CascadeType.ALL)
     private Set<Reservas> reservas;

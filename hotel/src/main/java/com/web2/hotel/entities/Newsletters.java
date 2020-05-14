@@ -1,5 +1,6 @@
 package com.web2.hotel.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name="newsletters")
 @Data
 @NoArgsConstructor @AllArgsConstructor
-public class Newsletters {
+public class Newsletters implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")

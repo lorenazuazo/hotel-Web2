@@ -15,12 +15,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Servicios</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="" id="boton" onclick="Mostrar('form-habitacion')">Habitaciones</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" id="boton" onclick="Mostrar()">Tarifas</a>
-            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  Habitaciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" th:href="@{/modificaciones/habitaciones}">Habitaciones</a>
+                  <a class="dropdown-item" href="#">Tipo habitacion</a>
+                  <a class="dropdown-item" href="#">Caracteristicas habitacion</a>                 
+                </div>
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/modificaciones/usuario}" id="usuario" >Usuarios</a>
             </li>

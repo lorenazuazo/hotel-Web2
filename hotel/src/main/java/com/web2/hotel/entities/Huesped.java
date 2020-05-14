@@ -70,9 +70,6 @@ public class Huesped implements Serializable{
     @ManyToMany(mappedBy="huespedGrupo")
     private Set<Reservas> reserva;
     
-    /*union con Habitacion*/
-    @ManyToMany(mappedBy="huespedHabitacion")
-    private Set<Habitacion> habitacion;
     
     /*union con Servicio*/
     @ManyToMany(mappedBy="huespedServicio")

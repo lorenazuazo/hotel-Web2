@@ -1,23 +1,14 @@
-function Mostrar(id){
-    document.getElementById(id).style.display = "block";
-    if(id=='form-usuario'){
-        var activar='form-usuario';
-    }
-}
-
+//para ocultar los formularios
 function Ocultar(id){
     document.getElementById(id).style.display = "none";
-
 }
 
-
-// llama a dataTable y cambia lo que dice el data table
 $(document).ready(function () {
-    $('#userList').DataTable({
+    $('#ListDataTable').DataTable({
         "language": {
             "decimal": "",
             "emptyTable": "No hay datos disponibles",
-            "info": "Mostrando _TOTAL_ registros",
+            "info": "_TOTAL_ registros encontrados",
             "infoEmpty": "No hay datos disponibles.",
             "infoFiltered": "(_MAX_ registros totales)",
             "infoPostFix": "",

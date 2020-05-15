@@ -24,4 +24,8 @@
 		</tr>
 		</tbody>
 	</table>
+		<!-- mensaje que muestra que se elimino el usuario -->
+		<div id="deleteError" th:if="${deleteError}" class="alert alert-danger text-center" role="alert">
+			<span th:text="${deleteError}"></span>
+		</div>
 </div> 

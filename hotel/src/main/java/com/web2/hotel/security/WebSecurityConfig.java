@@ -38,8 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .formLogin()
             .loginPage("/login")
             .permitAll()
-            .defaultSuccessUrl("/"
-            		+ "")
+            .defaultSuccessUrl("/" + "")
             .failureUrl("/login?error=true")
             //.successForwardUrl("/inicio")//puse esto de mas ver
             .usernameParameter("username")
@@ -71,9 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     //Registra el service para usuarios y el encriptador de contrasena
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
- 
-        // Setting Service to find User in the database.
-        // And Setting PassswordEncoder
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     
     }
 }

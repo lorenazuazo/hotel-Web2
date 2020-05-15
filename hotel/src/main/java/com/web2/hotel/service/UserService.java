@@ -14,5 +14,9 @@ public interface UserService {
 
 	public Optional<Usuario> getUserByUsername(String username);
 	
+	public Usuario updateUser(Usuario user)throws Exception;
+	
+	public void deleteUser(long id) throws Exception;
+	
 
 }

@@ -35,8 +35,6 @@
  
     <title>Modificaiones</title>
 </head>
-<body>
-
 <body style="background: rgb(100, 99, 99);">
 <!-- imagen de fondo -->
 <section class="banner"></section> 
@@ -47,5 +45,7 @@
 <!-- formulario y lista para modificar el usuario -->
 <div th:replace="/users-forms/user-view"th:remove="tag"></div>
 
+<!-- modal para confirmar la eliminacion -->
+	<div th:include="/components/modal-confirm-delete" th:remove="tag"></div>
 </body>
 </html>

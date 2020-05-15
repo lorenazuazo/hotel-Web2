@@ -1,5 +1,6 @@
 <form id="habForm" th:object="${habForm}" method="post" th:action="${editMode}?@{/modificaciones/editHabitacion}:@{/modificaciones/crearHabitacion}" autocomplete="off"> 
-    <div class="form-row">
+  <input class="form-control" type=hidden th:field="${habForm.id_habitacion}"  th:if="${editMode}"> 
+  <div class="form-row">
         <div class="form-group col-md-6">
             <label for="numerohabitacion">Habitacion</label>
             <input type="text" class="form-control" id="habitacion" th:field="*{numerohabitacion}" placeholder="Numero de habitacion">
@@ -33,12 +34,12 @@
                   Error en Descripcion</div>
             </li>
           </ul>
-  
-
         </div>
+
+
         <div class="col-lg-12 text-center">
-            <input type="reset" class="btn btn-secondary btnformuser" value="Cancelar">
-            <input type="submit" class="btn btn-primary btnformuser" th:value="${editMode}?'Guardar Cambios':'Crear habitacion'">
+          <a class="btn btn-secondary btnformuser" th:href="@{/modificaciones/habitaciones/cancel}">Cancelar</a>
+          <input type="submit" class="btn btn-primary btnformuser" th:value="${editMode}?'Guardar Cambios':'Crear habitacion'">
         </div>
         <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">
             Error</div>

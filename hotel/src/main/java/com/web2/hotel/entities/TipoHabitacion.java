@@ -44,7 +44,5 @@ public class TipoHabitacion implements Serializable{
 	@NotBlank
 	private String camas;
 	
-	 @OneToMany(cascade = CascadeType.ALL)
-	 private Set<Habitacion> habitacion;
 
 }

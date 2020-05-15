@@ -20,6 +20,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,9 +43,9 @@ public class Habitacion implements Serializable{
 	@NotBlank
 	private String numerohabitacion;
 	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float tarifa;
+	@Column
+	@NotNull
+	private int tarifa;
 	
 	@Column
 	@NotBlank

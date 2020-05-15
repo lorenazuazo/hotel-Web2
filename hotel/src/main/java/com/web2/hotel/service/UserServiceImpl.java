@@ -32,6 +32,9 @@ public class UserServiceImpl implements UserService{
 	
 	/*chequear pass valido*/
 	private boolean checkPassValido(Usuario user)throws Exception{
+		if(user.getConfirmPassword().isEmpty()) {
+			throw new Exception("Confirmar Password es obligatorio");
+		}
 		if(!user.getPassword().equals(user.getConfirmPassword())){
 			throw new Exception("Password y Confirmar Password no son iguales");			
 		}
@@ -56,6 +59,35 @@ public class UserServiceImpl implements UserService{
 	public Optional<Usuario> getUserByUsername(String username) {
 		Optional<Usuario> user= usuarioRepo.findByUsername(username);
 		return user;
+	}
+
+	@Override
+	public Usuario updateUser(Usuario formUser) throws Exception {
+		Optional<Usuario> user= usuarioRepo.findById(formUser.getId());
+		if (!user.isPresent()) {
+			   throw new Exception("No existe el usuario.");
+			}
+
+		Usuario toUser = user.get();
+		mapUser(formUser, toUser);
+		return usuarioRepo.save(toUser);
+	}
+	/*mapeo el usuario desde formUser a toUser*/
+	protected void mapUser(Usuario from,Usuario toUser) {
+		toUser.setNombre(from.getNombre());          
+		toUser.setApellido(from.getApellido());
+		toUser.setCorreo(from.getCorreo());
+		toUser.setDni(from.getDni());
+		toUser.setTelefono(from.getTelefono());
+		toUser.setUsername(from.getUsername());
+		toUser.setAuthority(from.getAuthority());
+	
+	}
+
+	@Override
+	public void deleteUser(long id) throws Exception {
+		Usuario user=usuarioRepo.findById(id).orElseThrow(()-> new Exception("No existe el usuario"));
+		usuarioRepo.delete(user);
 	}
 
 

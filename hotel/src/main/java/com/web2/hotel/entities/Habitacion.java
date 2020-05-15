@@ -58,7 +58,7 @@ public class Habitacion implements Serializable{
 	private TipoHabitacion tipoHabitacion;
     
     /*union con CaracteristicasHabitacion*/
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
         name = "habitacion_caracthabitacion", 
         joinColumns = { @JoinColumn(name = "habitacion_id")}, 
@@ -67,7 +67,7 @@ public class Habitacion implements Serializable{
 
 
     /*union con Huesped*/
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany
     @JoinTable(
         name = "habitacion_huesped", 
         joinColumns = { @JoinColumn(name = "habitacion_id")}, 

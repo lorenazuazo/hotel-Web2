@@ -5,13 +5,19 @@ function Ocultar(id){
 //para delete
 function confirmDelete(id){
 	$('#deleteModal').modal('show');
-	$("#userIdHiddenInput").val(id);
+	$("#Input").val(id);
 }
 
 function deleteUser(){
-	var id = $("#userIdHiddenInput").val();
-    window.location = "deleteUser/"+id;
+	var id = $("#Input").val();
+    window.location = "/modificaciones/deleteUser/"+id;
 }
+
+function deleteHabitacion(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/deleteHabitacion/"+id;
+}
+
 //configuraciones de dataTable
 $(document).ready(function () {
     $('#ListDataTable').DataTable({

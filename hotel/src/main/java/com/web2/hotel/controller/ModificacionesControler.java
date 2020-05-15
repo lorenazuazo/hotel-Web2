@@ -1,10 +1,5 @@
 package com.web2.hotel.controller;
 
-
-import static org.hamcrest.CoreMatchers.nullValue;
-
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.web2.hotel.entities.Habitacion;
 import com.web2.hotel.entities.Usuario;
-import com.web2.hotel.repositories.CaracteristicasHabitacionRepository;
-import com.web2.hotel.repositories.HabitacionRepository;
 import com.web2.hotel.repositories.RoleRepository;
-import com.web2.hotel.repositories.TipoHabitacionRepository;
 import com.web2.hotel.repositories.UserRepository;
 import com.web2.hotel.service.CaracteristicasHabitacionService;
 import com.web2.hotel.service.HabitacionService;
@@ -218,6 +209,16 @@ public class ModificacionesControler {
 		}
 
 		return "admin-form-habitacion";
+	}
+	
+	@GetMapping("/deleteHabitacion/{id_habitacion}")
+	public String deleteHabitacion(Model model, @PathVariable(name="id_habitacion") Long id) {
+		try {
+			habitacionService.deleteHabitacion(id);
+		} catch (Exception e) {
+			model.addAttribute("deleteError","No se pudo eliminar la habitacion");
+		}
+		return getHabitaciones(model); //es lo mismo que redirect per mantengo el mensaje de error
 	}
 	
 	@GetMapping("/habitaciones/cancel")

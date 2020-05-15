@@ -12,6 +12,8 @@ public interface HabitacionService {
 	public Habitacion createHabitacion(Habitacion habitacion)throws Exception;
 	
 	public Habitacion updateHabitacion(Habitacion habitacion)throws Exception;
+	
+	public void deleteHabitacion(long id)throws Exception;
 
 
 }

@@ -54,5 +54,13 @@ public class HabitacionServiceImpl implements HabitacionService{
 		habitacionTo.setTipoHabitacion(from.getTipoHabitacion());
 		habitacionTo.setCaractehabitacion(from.getCaractehabitacion());
 	}
-	
+
+	@Override
+	public void deleteHabitacion(long id) throws Exception {
+		Habitacion habit=habitacionRepo.findById(id)
+				.orElseThrow(()->new Exception("No existe la habitacion"));
+		habitacionRepo.delete(habit);
+		
+	}
+
 }

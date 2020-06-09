@@ -1,19 +1,11 @@
 package com.web2.hotel.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
-
-import com.sun.istack.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -71,20 +63,17 @@ public class Usuario implements Serializable {
 	private String confirmPassword;
 	
 	
-	 @ManyToMany(fetch = FetchType.EAGER)
-	 @JoinTable(name="users_authorities",
-	 joinColumns=@JoinColumn(name="usuario_id"),
-	 inverseJoinColumns=@JoinColumn(name="authority_id"))
-	 private Set<Authority> authority;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="users_authorities",
+	joinColumns=@JoinColumn(name="usuario_id"),
+	inverseJoinColumns=@JoinColumn(name="authority_id"))
+	private Set<Authority> authority;
 	 
 	
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario",cascade= CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario")
     private Set<Reservas> reservas;
 	
     
-	 @ManyToMany(fetch = FetchType.LAZY)
-	 @JoinTable(name="users_mensajes",
-	 joinColumns=@JoinColumn(name="usuario_id"),
-	 inverseJoinColumns=@JoinColumn(name="mensaje_id"))
-	 private Set<Mensajes> mensaje;
+    @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario")
+    private Set<Mensajes> mensaje;
 }

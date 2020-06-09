@@ -24,7 +24,9 @@ import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @SuppressWarnings("serial")
@@ -51,13 +53,20 @@ public class Habitacion implements Serializable{
 	@NotBlank
 	private String descripcion;
 	
+	@Column
+	@NotBlank
+	private int cantidadhuesped;
 	
 	/*union con Tipos de habitacion*/
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
 	@ManyToOne
 	@JoinColumn(name="id_tipohabitacion")
 	private TipoHabitacion tipoHabitacion;
     
     /*union con CaracteristicasHabitacion*/
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(
         name = "habitacion_caracthabitacion", 
@@ -67,6 +76,8 @@ public class Habitacion implements Serializable{
 
 
     /*union con Huesped*/
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
     @ManyToMany
     @JoinTable(
         name = "habitacion_huesped", 
@@ -74,6 +85,15 @@ public class Habitacion implements Serializable{
         inverseJoinColumns = {@JoinColumn(name = "huesped_id")})
     private Set<Huesped>huespedHabitacion;
 	
-	
+    /*union con Reservas*/
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+    @ManyToMany
+    @JoinTable(
+        name = "habitacion_reserva", 
+        joinColumns = { @JoinColumn(name = "habitacion_id")}, 
+        inverseJoinColumns = {@JoinColumn(name = "reserva_id")})
+    private Set<Reservas>reserva;
+    
 
 }

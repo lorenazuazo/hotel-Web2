@@ -199,6 +199,19 @@ span.subtitle {
 
 
 /*formulario de reserva*/
+input[type=date]::-webkit-inner-spin-button {/*para que no aparezca boton de subir o bajar los dias*/
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=number]::-webkit-inner-spin-button {/*para que no aparezca boton de subir o bajar los numeros*/
+    -webkit-appearance: none;
+    display: none;
+}
+
+#btnReservar{
+    margin-left: 450px;
+}
+
 .section {
 	position: relative;
 	height: 100vh;
@@ -330,6 +343,9 @@ span.subtitle {
 	width: 100%;
 	text-transform: capitalize;
 	border-radius: 3px;
+}
+.booking-form .submit-btn:hover{
+    color: black;
 }
 
 /*==================== 

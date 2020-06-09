@@ -22,7 +22,6 @@
   
     <!-- logo en pestanea de navegacion -->
   <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
- 
 
   <title >Hotel Sierras Inn</title>
 </head>
@@ -39,21 +38,21 @@
           <div class="row">
             <div class="booking-form">
               <div class="form-header">
-                <h1>Haga su Reserva</h1>
+                <h1>Comprobar Disponibilidad</h1>
               </div>
-              <form>
+              <form id="formReserva" th:object="${reservaForm}" method="post" th:action="@{/reserva}" autocomplete="off">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
                       <span class="form-label">Check In</span>
-                      <input class="form-control" type="date" required>
+                      <input class="form-control" type="date" id="fechaReservaIn" onkeydown="return false" required>
                     </div>
                     <span class="in-out hidden-xs hidden-sm">&#8652;</span>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <span class="form-label">Check out</span>
-                      <input class="form-control" type="date" required>
+                      <input class="form-control" type="date" id="fechaReservaOut" onkeydown="return false" required>
                     </div>
                   </div>
                 </div>
@@ -151,7 +150,7 @@
                             aria-describedby="basic-addon1" aria-required="true" name="correo">
                     </div>
                     <button type="submit" class="btn btn-primary ">Enviar</button>
-                    <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error Message</div><!-- lo que pone es lo que tiene esta variable ${formErrorMessage} -->
+                    <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error Message</div>
                 </form>
             </div>
         </div>
@@ -163,5 +162,8 @@
   <div th:replace="/components/scripts"></div>
  
 </body>
+
+  <!-- script del formulario-->
+  <script type="text/javascript" th:src="@{/js/formulario-reserva.js}"></script>
 
 </html>

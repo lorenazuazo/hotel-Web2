@@ -43,6 +43,5 @@ public class TipoHabitacion implements Serializable{
 	@Column
 	@NotBlank
 	private String camas;
-	
 
 }

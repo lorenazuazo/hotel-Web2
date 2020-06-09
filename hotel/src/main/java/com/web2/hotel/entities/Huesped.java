@@ -61,10 +61,6 @@ public class Huesped implements Serializable{
 			F,M
 		}
 	
-	
-	/*union con reserva para el huesped que hace la reserva*/
-    @ManyToMany(mappedBy="huespedPrincipal")
-    private Set<Reservas> reservaPrincipal;
     
     /*union con reserva para el grupo del huesped que hace la reserva*/
     @ManyToMany(mappedBy="huespedGrupo")

@@ -25,7 +25,7 @@ values("Individual","habitacion para 1 o 2 personas","10m cuad","1 doble o 2 sim
 ("Doble","habitacion para 1 o 2 personas","10m cuad","1 doble o 2 simples"),
 ("Superior","habitacion hasta 3 personas","15m cuad","1 doble o 1 simples"),
 ("Estudio","habitacion hasta 3 personas c/estudio","30m cuad","1 doble o 1 queen"),
-("Quad","habitacion hasta 4 personas","30m cuad","1 doble o 1 queen");
+("Quad","habitacion hasta 4 personas","30m cuad","2 doble o 2 queen");
 
 insert into caracteristicashabitacion(detalle)
 values("aire acondicionado"),
@@ -34,15 +34,15 @@ values("aire acondicionado"),
 ("secador de pelo"),
 ("caja de seguridad");
 
-insert into habitacion(numerohabitacion,id_tipohabitacion,tarifa,descripcion)
-values("101",1,2500,"habitacion con balcon"),
-("102",2,2600,"habitacion con vista a la calle"),
-("103",3,3500,"habitacion sin vista"),
-("104",4,3500,"habitacion con estudio"),
-("105",5,3800,"habitacion"),
-("106",6,3800,"habitacion con alfombra"),
-("107",2,3900,"habitacion junior"),
-("108",3,4500,"habitacion dos balcones");
+insert into habitacion(numerohabitacion,id_tipohabitacion,tarifa,descripcion,cantidadhuesped)
+values("101",1,2500,"habitacion con balcon",2),
+("102",2,2600,"habitacion con vista a la calle",3),
+("103",3,3500,"habitacion sin vista",2),
+("104",4,3500,"habitacion con estudio",3),
+("105",5,3800,"habitacion",3),
+("106",6,3800,"habitacion con alfombra",4),
+("107",2,3900,"habitacion junior",3),
+("108",3,4500,"habitacion dos balcones",2);
 
 insert into habitacion_caracthabitacion(habitacion_id,caracthabitacion_id)
 values(1,1),
@@ -67,4 +67,15 @@ values(1,1),
 (7,4),
 (8,4);
 
+insert into reservas(apellido,cant_adultos,cant_habitaciones,cant_ninios,dni,estado,fecha_entrada,fecha_reserva,fecha_salida,nombre,tarifa_reserva,id_usuario)
+values("gaita",2,1,0,"259635",'CONFIRMADA','2020-05-27','2020-05-27','2020-05-29',"lorena",3500,3),
+("cuchita",3,2,1,"25569999",'CONFIRMADA','2020-06-25','2020-05-27','2020-06-29',"lorena",3500,3),
+("tururu",5,3,2,"255698",'CONFIRMADA','2020-06-02','2020-05-27','2020-06-10',"lorena",8500,2);
 
+insert into habitacion_reserva(habitacion_id,reserva_id)
+values(1,1),
+(2,1),
+(3,1),
+(4,2),
+(5,3),
+(6,3);

@@ -1,33 +1,22 @@
 package com.web2.hotel.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotBlank;
-
+import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
+import com.sun.istack.NotNull;
 
-
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @SuppressWarnings("serial")
@@ -43,82 +32,80 @@ public class Reservas  implements Serializable{
 	private long idReserva;
 	
 	@Column
-	@NotBlank
-	@Temporal(TemporalType.DATE)
-	private Calendar fechaEntrada;
+	@NotNull
+	private String nombre;
 	
 	@Column
-	@NotBlank
-	@Temporal(TemporalType.DATE)
-	private Calendar fechaSalida;
+	@NotNull
+	private String apellido;
 	
 	@Column
-	@NotBlank
-	private int cantHuesped;
-	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float tarifaReserva;
-	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float pagoEntrega;
-	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float gastoAdicional;
-	
-	@Column(precision=10, scale=2)
-	@NotBlank
-	private float gastoTotal;
+	@NotNull
+	private String dni;
 	
 	@Column
-	@NotBlank
-	@Temporal(TemporalType.DATE)
-	private Calendar fechaPagoReserva;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaEntrada;
 	
 	@Column
-	@NotBlank
-	@Temporal(TemporalType.DATE)
-	private Calendar fechaPagoTotal;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaSalida;
 	
 	@Column
-	@NotBlank
-	@Enumerated(EnumType.STRING)
-	private Estado estadoReserva;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaReserva;
 	
+	@Column
+	@NotNull
+	private int cantHabitaciones;
 	
-	@Column(length=16)
-	@NotBlank
-	private String clave;
+	@Column
+	@NotNull
+	private int cantAdultos;
 	
+	@Column
+	private int cantNinios;
+	
+	@Column
+	private int tarifaReserva;
+	
+	@Column
 	@Enumerated(EnumType.STRING)
 	private Estado estado;
 	
-	/*union con huesped para el grupo del huesped que hace la reserva*/
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-        name = "reserva_huespedprincipal", 
-        joinColumns = {@JoinColumn(name = "reserva_id")}, 
-        inverseJoinColumns = {@JoinColumn(name = "huesped_id")})
-    private Set<Huesped>huespedPrincipal;
+	@Transient
+	private String username;
+	
+	
+	/*union con usuario para saber quien hace la reserva*/
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(name="idUsuario")
+	 private Usuario usuario;
     
     /*union con huesped para el grupo del huesped que hace la reserva*/
-    @ManyToMany(cascade = {CascadeType.ALL})
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+    @ManyToMany
     @JoinTable(
         name = "reserva_grupohuesped", 
         joinColumns = { @JoinColumn(name = "reserva_id")}, 
         inverseJoinColumns = {@JoinColumn(name = "huesped_id")})
     private Set<Huesped>huespedGrupo;
-	
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="idUsuario")
-    private Usuario usuario ;
     
-
-	
-	private enum Estado {
-		ACTIVA, PAUSADA, CANCELADA
+    /*union con habitaciones*/
+	@ToString.Exclude
+	@EqualsAndHashCode.Exclude
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy="reserva")
+    private Set<Habitacion> habitacion;
+    
+	  
+	public enum Estado {
+		CONFIRMADA,CONCLUIDA,EXPIRADA
 	}
 
 }

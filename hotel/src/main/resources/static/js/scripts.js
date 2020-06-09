@@ -18,6 +18,7 @@ function deleteHabitacion(){
     window.location = "/modificaciones/deleteHabitacion/"+id;
 }
 
+
 //configuraciones de dataTable
 $(document).ready(function () {
     $('#ListDataTable').DataTable({

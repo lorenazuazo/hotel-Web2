@@ -7,6 +7,6 @@ public interface NewsletterService {
 	
 	public Iterable<Newsletters> getAll();
 	
-	public Newsletters registratEmail(Newsletters email) throws Exception;
+	public void registratEmail(Newsletters email) throws Exception;
 
 }

@@ -29,11 +29,10 @@ public class NewslettersServiceImpl implements NewsletterService{
 
 
 	@Override
-	public Newsletters registratEmail(Newsletters email) throws Exception {
+	public void registratEmail(Newsletters email) throws Exception {
 		if(checkEmailDisponible(email)) {
 			email=newsletterRepo.save(email);
 		}
-		return null;
 	}
 
 }

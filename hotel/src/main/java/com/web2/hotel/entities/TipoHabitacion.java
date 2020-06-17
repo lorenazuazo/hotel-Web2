@@ -1,17 +1,15 @@
 package com.web2.hotel.entities;
 
 import java.io.Serializable;
-import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 import org.hibernate.annotations.GenericGenerator;
+
+import com.web2.hotel.entities.CaracteristicasHabitacion.Estado;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @SuppressWarnings("serial")
@@ -43,5 +41,13 @@ public class TipoHabitacion implements Serializable{
 	@Column
 	@NotBlank
 	private String camas;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
+	
+	public enum Estado {
+		VIGENTE,FUERA_DE_SERVICIO
+	}
 
 }

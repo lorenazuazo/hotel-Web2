@@ -2,19 +2,14 @@ package com.web2.hotel.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Set;
-
 import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.sun.istack.NotNull;
-
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -59,6 +54,9 @@ public class Reservas  implements Serializable{
 	private LocalDate fechaReserva;
 	
 	@Column
+	private int cantDias;
+	
+	@Column
 	@NotNull
 	private int cantHabitaciones;
 	
@@ -100,12 +98,16 @@ public class Reservas  implements Serializable{
     /*union con habitaciones*/
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy="reserva")
-    private Set<Habitacion> habitacion;
-    
-	  
+	@ManyToMany
+    @JoinTable(
+	        name = "reserva_habitacion", 
+	        joinColumns = { @JoinColumn(name = "reserva_id")}, 
+	        inverseJoinColumns = {@JoinColumn(name = "habitacion_id")})
+    private Set<Habitacion>habitacion;
+	
+      
 	public enum Estado {
-		CONFIRMADA,CONCLUIDA,EXPIRADA
+		CONFIRMADA,CONCLUIDA,EXPIRADA,CANCELADA
 	}
 
 }

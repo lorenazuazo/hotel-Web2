@@ -2,12 +2,13 @@ package com.web2.hotel.entities;
 
 import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.*;
-
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.web2.hotel.entities.TipoHabitacion.Estado;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,14 +27,22 @@ public class Servicios implements Serializable{
 	@Column
 	private long idServicio;
 	
-	@Column(length=100)
-	@NotBlank
-	private String nombreServicio;
-	
 	@Column(length=255)
 	@NotBlank
 	private String descripcionServicio;
 	
+	@Column
+	@NotNull
+	private int costoServicio;
+	
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private Estado estado;
+	
+	public enum Estado {
+		VIGENTE,FUERA_DE_SERVICIO
+	}
 	
 	
 	@ManyToMany(cascade = {CascadeType.ALL})

@@ -1,6 +1,5 @@
 package com.web2.hotel.service;
 
-
 import com.web2.hotel.entities.Newsletters;
 
 public interface NewsletterService {

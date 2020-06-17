@@ -18,6 +18,36 @@ function deleteHabitacion(){
     window.location = "/modificaciones/deleteHabitacion/"+id;
 }
 
+function deleteReserva(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/deleteReserva/"+id;
+}
+
+function deleteServicio(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/eliminar-servicio/"+id;
+}
+
+function deleteCaracteristica(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/eliminar-caracteristica/"+id;
+}
+
+function deleteTipohabitacion(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/eliminar-tipoHabitacion/"+id;
+}
+
+function deleteRoles(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/eliminar-Rol/"+id;
+}
+
+function deleteHuesped(){
+	var id = $("#Input").val();
+    window.location = "/modificaciones/eliminar-Huesped/"+id;
+}
+
 
 //configuraciones de dataTable
 $(document).ready(function () {

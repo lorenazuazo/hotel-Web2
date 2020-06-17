@@ -1,14 +1,10 @@
 package com.web2.hotel.service;
 
-
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.web2.hotel.entities.Usuario;
 import com.web2.hotel.repositories.UserRepository;
-
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -89,10 +85,4 @@ public class UserServiceImpl implements UserService{
 		Usuario user=usuarioRepo.findById(id).orElseThrow(()-> new Exception("No existe el usuario"));
 		usuarioRepo.delete(user);
 	}
-
-
-
-
-
-
 }

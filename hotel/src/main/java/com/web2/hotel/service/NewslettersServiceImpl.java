@@ -1,10 +1,8 @@
 package com.web2.hotel.service;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.web2.hotel.entities.Newsletters;
 import com.web2.hotel.repositories.NewslattersRepository;
 

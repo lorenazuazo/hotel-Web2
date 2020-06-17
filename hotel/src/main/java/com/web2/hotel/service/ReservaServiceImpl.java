@@ -2,7 +2,6 @@ package com.web2.hotel.service;
 
 import java.time.LocalDate;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.web2.hotel.entities.Reservas;
@@ -29,16 +28,9 @@ public class ReservaServiceImpl implements ReservaService {
 		return reservaRepo.findAll();
 	}
 	
-	
-
 
 	@Override
 	public void registrarReserva(Reservas reserva) throws Exception {
-		/*Iterable<Habitacion>habitDisponibles= habitacionService
-				.getHabitacionesDisponibles(reserva.getFechaEntrada(), reserva.getFechaSalida());
-		if(habitDisponibles==null) {
-			throw new Exception("No hay Habitaciones Disponibles");
-		}*/
 		Usuario usuario=userRepo.findByUsername(reserva.getUsername()).get();
 		Reservas toReserva = new Reservas();
 		mapReserva(reserva, toReserva,usuario);
@@ -52,18 +44,69 @@ public class ReservaServiceImpl implements ReservaService {
 		toReserva.setFechaEntrada(from.getFechaEntrada());
 		toReserva.setFechaSalida(from.getFechaSalida());
 		toReserva.setFechaReserva(LocalDate.now());
+		toReserva.setCantDias(from.getCantDias());
 		toReserva.setCantHabitaciones(from.getCantHabitaciones());
 		toReserva.setCantAdultos(from.getCantAdultos());
 		toReserva.setCantNinios(from.getCantNinios());
+		toReserva.setTarifaReserva(from.getTarifaReserva());
 		toReserva.setEstado(Estado.CONFIRMADA); 
 		toReserva.setUsuario(us);
-		//toReserva.setHabitacion();
+		toReserva.setHabitacion(from.getHabitacion());
 	}
 
 	@Override
 	public Iterable<Reservas> getAllReservasConfirmadas() {
-		//Estado estado=Estado.CONFIRMADA;
 		return reservaRepo.findAllByEstado(Estado.CONFIRMADA);
+	}
+
+
+	@Override
+	public void deleteReserva(long id) throws Exception {
+		Reservas reserva=reservaRepo.findById(id)
+				.orElseThrow(()->new Exception("No existe la reserva"));
+		reservaRepo.delete(reserva);
+		
+	}
+
+	@Override
+	public Reservas getReservaById(long id) throws Exception {
+		Optional<Reservas> reserva= reservaRepo.findById(id);
+		if(!reserva.isPresent()) {
+			throw new Exception("No existe reserva con ese id");
+		}
+		return reserva.get();
+	}
+
+
+
+
+	@Override
+	public Reservas updateReserva(Reservas reservaFrom) throws Exception {
+		Optional<Reservas> res=reservaRepo.findById(reservaFrom.getIdReserva());
+		if(!res.isPresent()) {
+			throw new Exception("No existe reserva");
+		}
+		
+		Reservas reservaTo=res.get();
+		reservaMap(reservaFrom,reservaTo);
+		return reservaRepo.save(reservaTo);
+	}
+	
+	protected void reservaMap(Reservas from,Reservas reservaTo) {
+		reservaTo.setNombre(from.getNombre());;          
+		reservaTo.setApellido(from.getApellido());
+		reservaTo.setDni(from.getDni());
+		reservaTo.setFechaEntrada(from.getFechaEntrada());
+		reservaTo.setFechaSalida(from.getFechaSalida());
+		reservaTo.setFechaReserva(from.getFechaReserva());
+		reservaTo.setCantDias(from.getCantDias());
+		reservaTo.setCantHabitaciones(from.getCantHabitaciones());
+		reservaTo.setCantAdultos(from.getCantAdultos());
+		reservaTo.setCantNinios(from.getCantNinios());
+		reservaTo.setTarifaReserva(from.getTarifaReserva());
+		reservaTo.setEstado(from.getEstado()); 
+		reservaTo.setUsuario(from.getUsuario());
+		reservaTo.setHabitacion(from.getHabitacion());
 	}
 
 }

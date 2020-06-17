@@ -2,23 +2,28 @@ package com.web2.hotel.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.web2.hotel.entities.Habitacion;
 import com.web2.hotel.entities.Reservas;
 import com.web2.hotel.entities.Reservas.Estado;
+import com.web2.hotel.entities.Habitacion.EstadoHabitacion;
 import com.web2.hotel.repositories.HabitacionRepository;
 import com.web2.hotel.repositories.ReservaRepository;
 import com.web2.hotel.repositories.TipoHabitacionRepository;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class HabitacionServiceImpl implements HabitacionService{
 
 	@Autowired
 	HabitacionRepository habitacionRepo;
+	
+	@Autowired
+	HabitacionService habitacionService;
 	
 	@Autowired
 	ReservaRepository reservaRepo;
@@ -64,6 +69,7 @@ public class HabitacionServiceImpl implements HabitacionService{
 		habitacionTo.setDescripcion(from.getDescripcion());
 		habitacionTo.setTipoHabitacion(from.getTipoHabitacion());
 		habitacionTo.setCaractehabitacion(from.getCaractehabitacion());
+		habitacionTo.setEstado(from.getEstado());
 	}
 
 	@Override
@@ -87,7 +93,7 @@ public class HabitacionServiceImpl implements HabitacionService{
 		 while (parte_entera>4) {          
 	            habi=habi+1;
 	            parte_entera=parte_entera-4;
-	            //System.out.println ("parte entera: " + parte_entera + " habi: "+habi);
+	            
 	        } 
 		 if(parte_decimal>0 && parte_entera>4) {
 				habi=habi+1;
@@ -96,22 +102,23 @@ public class HabitacionServiceImpl implements HabitacionService{
 	}
 
 	@Override
-	public Iterable<Habitacion> getHabitacionesDisponibles(Reservas reservaConsulta) throws Exception {
+	public Set<Habitacion> getHabitacionesDisponibles(Reservas reservaConsulta) throws Exception {
 		ArrayList<Reservas> reservasConfirmadas=(ArrayList<Reservas>) reservaRepo.findAllByEstado(Estado.CONFIRMADA);
-		ArrayList<Habitacion> habitaciones=(ArrayList<Habitacion>) habitacionRepo.findAllByOrderByCantidadhuespedDescTarifaDesc();	
+		ArrayList<Habitacion> habitaciones=(ArrayList<Habitacion>) habitacionRepo.findAllByEstadoOrderByCantidadhuespedDescTarifaDesc(EstadoHabitacion.VIGENTE);	
+		Set<Habitacion>habitparaReserva=new HashSet<>();
+		LocalDate fechaIn=reservaConsulta.getFechaEntrada();
+		LocalDate fechaOut=reservaConsulta.getFechaSalida();
 		
-		ArrayList<Habitacion>habitparaReserva=new ArrayList<>();
 		
 		for(Reservas reserva: reservasConfirmadas) {
-			LocalDate fechaIn=reservaConsulta.getFechaEntrada();
-			LocalDate fechaOut=reservaConsulta.getFechaSalida();
 			LocalDate fechaEntradaResevada=reserva.getFechaEntrada();
 			LocalDate fechaSalidaReservada=reserva.getFechaSalida();
 			
 			//consulto si la fecha de entrada o salida que quiero reservar ya hay reservas Confirmadas
 			//entonces elimino de la lista habitaciones las habitaciones ocupadas para esa fecha
 			if((fechaEntradaResevada.isBefore(fechaIn) && fechaIn.isBefore(fechaSalidaReservada)) || 
-					(fechaEntradaResevada.isBefore(fechaOut)&& fechaOut.isBefore(fechaSalidaReservada))){
+					(fechaEntradaResevada.isBefore(fechaOut)&& fechaOut.isBefore(fechaSalidaReservada)) ||
+					(fechaEntradaResevada.isEqual(fechaIn)) || (fechaSalidaReservada.isEqual(fechaOut))){
 				//para cada habitacion de la reserva sacarla de la lista de habitaciones disponibles
 				for(Habitacion h : reserva.getHabitacion()) {
 					if(habitaciones.contains(h)){
@@ -119,6 +126,9 @@ public class HabitacionServiceImpl implements HabitacionService{
 					}
 				}
 			}
+		}
+		if(habitaciones.isEmpty() ) {
+			throw new Exception("No hay habitaciones disponibles para esas fechas");
 		}
 		
 		//Para calcular el numero de habitacionesque necesitan
@@ -138,41 +148,59 @@ public class HabitacionServiceImpl implements HabitacionService{
 				}				
 			}	  
 		}
+		
 		/*2-controlo si todos los huespedes tienen habitacion*/
 		int huspedasignados=0;
 		for(Habitacion h : habitparaReserva) {
 			huspedasignados= huspedasignados + h.getCantidadhuesped();
 		}
 		
+		
 		int huespsinhabitacion=(int) (canthuesped-huspedasignados);
-		int contador=huespsinhabitacion;
+		/*int contador=huespsinhabitacion;*/
 		/*3-si no encuentra la cantidad de habitaciones pedidas para cubrir todos los huespedes
 		 * revisa cuantos huesped quedaron sin habitacion y empieza a buscar habitaciones disponibles
 		 * que cubran los huespedes que no tienen habitacion 
 		 */
-		while(huespsinhabitacion > 0) {
+		while(huespsinhabitacion > 0 && !habitaciones.isEmpty()) {
 			boolean bandera=false;
-			contador=huespsinhabitacion;
-			for (int i=habitaciones.size()-1;i>=0;i--) {
-				if((habitaciones.get(i).getCantidadhuesped()>= contador) && (bandera==false)) {
-					habitparaReserva.add(habitaciones.get(i));
-					huespsinhabitacion=huespsinhabitacion-habitaciones.get(i).getCantidadhuesped();
-					habitaciones.remove(i);
-					bandera=true;
-				}else {
-					contador--;
+			for(int a=huespsinhabitacion;a>=0;a--) {
+				for (int i=habitaciones.size()-1;i>=0;i--) {
+					if((habitaciones.get(i).getCantidadhuesped()>= a) && (bandera==false)) {
+						habitparaReserva.add(habitaciones.get(i));
+						huespsinhabitacion=huespsinhabitacion-habitaciones.get(i).getCantidadhuesped();
+						habitaciones.remove(i);
+						bandera=true;
+					}
 				}
 			}
 		}
 		
-		
- 		for(Habitacion h : habitparaReserva) {
-			System.out.println("numero habita: "+h.getNumerohabitacion()+" "
-					+ "cantidad de huesped de la habitacion: "+h.getCantidadhuesped());
-	
+		if(huespsinhabitacion > 0 ) {
+			throw new Exception("No hay habitaciones disponibles para los huesped solicitados");
 		}
 		
 		return habitparaReserva;
+	}
+
+	@Override
+	public Reservas getTarifaReserva(Reservas reserva) throws Exception {	
+		LocalDate fechaIn=reserva.getFechaEntrada();
+		LocalDate fechaOut=reserva.getFechaSalida();
+
+		long dias = DAYS.between(fechaIn, fechaOut);
+		int monto=0;
+		int cantHabitaciones=0;
+		for(Habitacion h:reserva.getHabitacion()) {
+			monto=h.getTarifa()+ monto;	
+			cantHabitaciones++;
+		}
+		
+		reserva.setCantDias((int) dias);
+		reserva.setTarifaReserva((int) (monto*dias));
+		reserva.setCantHabitaciones(cantHabitaciones);
+		
+		return reserva;
 	}
 
 }

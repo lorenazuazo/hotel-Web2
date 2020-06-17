@@ -1,18 +1,13 @@
 package com.web2.hotel.repositories;
 
-import java.util.ArrayList;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import com.web2.hotel.entities.Habitacion;
-
-
+import com.web2.hotel.entities.Habitacion.EstadoHabitacion;;
 
 @Repository
 public interface HabitacionRepository extends CrudRepository<Habitacion, Long>{
 	
-	public ArrayList<Habitacion> findByReservaNotNull();
-	
-	public Iterable<Habitacion> findAllByOrderByCantidadhuespedDescTarifaDesc();
+	public Iterable<Habitacion> findAllByEstadoOrderByCantidadhuespedDescTarifaDesc(EstadoHabitacion estadoHabitacion);
 
 }

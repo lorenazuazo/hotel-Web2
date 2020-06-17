@@ -1,7 +1,6 @@
 package com.web2.hotel.service;
 
 import java.util.Optional;
-
 import com.web2.hotel.entities.Usuario;
 
 public interface UserService {

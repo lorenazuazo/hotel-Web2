@@ -2,13 +2,12 @@ package com.web2.hotel.entities;
 
 import java.io.Serializable;
 import java.util.Set;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -50,12 +49,12 @@ public class Huesped implements Serializable{
 	private String dni;
 	
 	@Column
-	@NotBlank
+	@NotNull
 	private int edad;
 
 	@Column
 	@NotBlank
-	private int telefono;
+	private String telefono;
 	
 	 protected enum Genero {
 			F,M

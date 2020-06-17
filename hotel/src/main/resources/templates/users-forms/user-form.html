@@ -39,31 +39,31 @@
                 Error en Correo</div>
         </div>
         <div class="form-group col-md-6">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" th:field="*{username}"placeholder="Username">
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}"placeholder="Nombre de Usuario">
             <div class="alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
                 Error en Username</div>
         </div>
         <div class="form-group col-md-6" th:if="${editMode==null or editMode==false}">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" th:field="*{password}"placeholder="Password">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}"placeholder="Contraseña">
             <div class="alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
                 Error en Paswword</div>
         </div>
         <div class="form-group col-md-6" th:if="${editMode==null or editMode==false}">
-            <label for="confirmPassword">Confirme Password</label>
-            <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}"placeholder="confirme Password">
+            <label for="confirmPassword">Confirme Contraseña</label>
+            <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}"placeholder="confirme Contraseña">
             <div class="alert-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">
                 Error en Paswword</div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="tipoHabitacion">Roles</label>
-            <select th:field="${userForm.authority}" class="form-control" id="tipoHabitacion">
-              <option th:each="role :${roles}" th:value="${role.id}" th:text="${role.authority}"></option>
-            </select>
-            <div class="alert-danger" th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">
-                Error en Roles</div>
-          </div>  
+        <ul>
+            <li th:each="role :${roles}" id="checkbox" >
+                <input type="checkbox" name="searchValues" th:field="${userForm.authority}" th:value="${role.id}"/>
+                <label th:text="${role.authority}"></label>
+                <div class="alert-danger" th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">
+                  Error en Roles</div>
+            </li>
+          </ul>  
         <div class="col-lg-12 text-center">
             <a class="btn btn-secondary btnformuser" th:href="@{/modificaciones/usuario/cancel}">Cancelar</a>
             <input type="submit" class="btn btn-primary btnformuser" th:value="${editMode}?'Guardar Cambios':'Crear usuario'">

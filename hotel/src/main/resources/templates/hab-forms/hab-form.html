@@ -26,17 +26,30 @@
             <div class="alert-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion">
                 Error en Descripcion</div>
         </div>
+        <div class="form-group col-md-6">
+          <label for="cantidadhuesped">Cantidad Huespedes</label>
+          <input type="number" class="form-control" id="cantidadhuesped" th:field="*{cantidadhuesped}" placeholder="Cantidad huespedes">
+          <div class="alert-danger" th:if="${#fields.hasErrors('cantidadhuesped')}" th:errors="*{cantidadhuesped">
+              Error en Cantidd huesped</div>
+         </div> 
+         <div class="form-group col-md-6">
+          <label for="estado">Estado</label>
+          <select th:field="${habForm.estado}" class="form-control" id="estado">
+            <option th:each="estado:${T(com.web2.hotel.entities.Habitacion.EstadoHabitacion).values()}" th:value="${estado}" th:text="${estado}"></option>
+          </select>
+          <div class="alert-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}">
+              Error en estado</div>
+        </div> 
+
           <ul>
             <li th:each="caracteristica:${caractHabitacion}" id="checkbox" >
                 <input type="checkbox" name="searchValues" th:field="*{caractehabitacion}" th:value="${caracteristica.id}"/>
                 <label th:text="${caracteristica.detalle}"></label>
-                <div class="alert-danger" th:if="${#fields.hasErrors('caractehabitacion')}" th:errors="*{caractehabitacion">
+                <div class="alert-danger" th:if="${#fields.hasErrors('caractehabitacion')}" th:errors="*{caractehabitacion}">
                   Error en Descripcion</div>
             </li>
           </ul>
         </div>
-
-
         <div class="col-lg-12 text-center">
           <a class="btn btn-secondary btnformuser" th:href="@{/modificaciones/habitaciones/cancel}">Cancelar</a>
           <input type="submit" class="btn btn-primary btnformuser" th:value="${editMode}?'Guardar Cambios':'Crear habitacion'">

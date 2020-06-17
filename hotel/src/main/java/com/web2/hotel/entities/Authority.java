@@ -1,10 +1,8 @@
 package com.web2.hotel.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

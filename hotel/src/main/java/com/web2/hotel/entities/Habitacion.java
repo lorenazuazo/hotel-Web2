@@ -2,25 +2,11 @@ package com.web2.hotel.entities;
 
 import java.io.Serializable;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 import org.hibernate.annotations.GenericGenerator;
-
 import com.sun.istack.NotNull;
+import com.web2.hotel.entities.Servicios.Estado;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,8 +40,16 @@ public class Habitacion implements Serializable{
 	private String descripcion;
 	
 	@Column
-	@NotBlank
+	@NotNull
 	private int cantidadhuesped;
+	
+	@Column
+	@Enumerated(EnumType.STRING)
+	private EstadoHabitacion estado;
+	
+	public enum EstadoHabitacion {
+		VIGENTE,FUERA_DE_SERVICIO
+	}
 	
 	/*union con Tipos de habitacion*/
 	@ToString.Exclude
@@ -88,12 +82,8 @@ public class Habitacion implements Serializable{
     /*union con Reservas*/
 	@ToString.Exclude
 	@EqualsAndHashCode.Exclude
-    @ManyToMany
-    @JoinTable(
-        name = "habitacion_reserva", 
-        joinColumns = { @JoinColumn(name = "habitacion_id")}, 
-        inverseJoinColumns = {@JoinColumn(name = "reserva_id")})
-    private Set<Reservas>reserva;
+	@ManyToMany(mappedBy="habitacion")
+    private Set<Reservas> reservas;
+	
     
-
 }

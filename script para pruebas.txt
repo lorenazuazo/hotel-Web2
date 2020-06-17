@@ -1,8 +1,3 @@
-drop database hotel;
-create DATABASE hotel;
-use hotel;
-
-
 insert into authority(id,authority)
 values(1,"ROLE_ADMIN"),
 (2,"ROLE_USER");
@@ -19,20 +14,20 @@ values(1,1),
 (2,2),
 (3,2);
 
-insert into tipohabitacion(clase,descripcion,dimension,camas)
-values("Individual","habitacion para 1 o 2 personas","10m cuad","1 doble o 2 simples"),
-("Junior suite","habitacion hasta 3 personas","19m cuad","1 queen o 1 simple"),
-("Doble","habitacion para 1 o 2 personas","10m cuad","1 doble o 2 simples"),
-("Superior","habitacion hasta 3 personas","15m cuad","1 doble o 1 simples"),
-("Estudio","habitacion hasta 3 personas c/estudio","30m cuad","1 doble o 1 queen"),
-("Quad","habitacion hasta 4 personas","30m cuad","2 doble o 2 queen");
+insert into tipohabitacion(clase,descripcion,dimension,camas,estado)
+values("Individual","habitacion para 1 o 2 personas","10m cuad","1 doble o 2 simples","VIGENTE"),
+("Junior suite","habitacion hasta 3 personas","19m cuad","1 queen o 1 simple","VIGENTE"),
+("Doble","habitacion para 1 o 2 personas","10m cuad","1 doble o 2 simples","VIGENTE"),
+("Superior","habitacion hasta 3 personas","15m cuad","1 doble o 1 simples","VIGENTE"),
+("Estudio","habitacion hasta 3 personas c/estudio","30m cuad","1 doble o 1 queen","VIGENTE"),
+("Quad","habitacion hasta 4 personas","30m cuad","2 doble o 2 queen","VIGENTE");
 
-insert into caracteristicashabitacion(detalle)
-values("aire acondicionado"),
-("minibar"),
-("yacuzzi"),
-("secador de pelo"),
-("caja de seguridad");
+insert into caracteristicashabitacion(detalle,estado)
+values("aire acondicionado","VIGENTE"),
+("minibar","VIGENTE"),
+("yacuzzi","VIGENTE"),
+("secador de pelo","VIGENTE"),
+("caja de seguridad","VIGENTE");
 
 insert into habitacion(numerohabitacion,id_tipohabitacion,tarifa,descripcion,cantidadhuesped)
 values("101",1,2500,"habitacion con balcon",2),
@@ -67,15 +62,17 @@ values(1,1),
 (7,4),
 (8,4);
 
-insert into reservas(apellido,cant_adultos,cant_habitaciones,cant_ninios,dni,estado,fecha_entrada,fecha_reserva,fecha_salida,nombre,tarifa_reserva,id_usuario)
-values("gaita",2,1,0,"259635",'CONFIRMADA','2020-05-27','2020-05-27','2020-05-29',"lorena",3500,3),
-("cuchita",3,2,1,"25569999",'CONFIRMADA','2020-06-25','2020-05-27','2020-06-29',"lorena",3500,3),
-("tururu",5,3,2,"255698",'CONFIRMADA','2020-06-02','2020-05-27','2020-06-10',"lorena",8500,2);
+insert into reservas(apellido,cant_adultos,cant_dias,cant_habitaciones,cant_ninios,dni,estado,fecha_entrada,fecha_reserva,fecha_salida,nombre,tarifa_reserva,id_usuario)
+values("gaita",2,4,3,0,"259635",'CONFIRMADA','2020-06-13','2020-06-13','2020-06-29',"lorena",3500,1),
+("cuchita",3,3,1,1,"25569999",'CONFIRMADA','2020-06-25','2020-05-27','2020-06-29',"lorena",3500,3),
+("tururu",5,2,2,2,"255698",'CONFIRMADA','2020-06-29','2020-05-27','2020-07-01',"lorena",8500,2);
 
-insert into habitacion_reserva(habitacion_id,reserva_id)
+insert into reserva_habitacion(reserva_id,habitacion_id)
 values(1,1),
-(2,1),
-(3,1),
-(4,2),
-(5,3),
-(6,3);
+(1,2),
+(1,3),
+(2,4),
+(3,5),
+(3,6);
+
+

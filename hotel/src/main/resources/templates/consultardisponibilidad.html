@@ -23,6 +23,7 @@
     <!-- logo en pestanea de navegacion -->
   <link rel="icon" type="imagen/png" href="../static/img/letra-h.png" th:href="@{/img/letra-h.png}">
 
+
   <title >Hotel Sierras Inn</title>
 </head>
 
@@ -49,7 +50,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="form-label">Nombre</span>
-                            <input class="form-control" type="text" id="nombre" th:field="*{nombre}" required>
+                            <input class="form-control" type="text" id="nombre" name="nombre" required>
                             <div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
                               Error en Nombre</div>
                         </div>
@@ -57,7 +58,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="form-label">Apellido</span>
-                            <input class="form-control" type="text" id="apellido" th:field="*{apellido}" required>
+                            <input class="form-control" type="text" id="apellido" name="apellido" required>
                             <div class="alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">
                               Error apellido</div>
                         </div>
@@ -65,7 +66,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="form-label">Dni</span>
-                            <input class="form-control" type="text" id="nombre" th:field="*{dni}" required>
+                            <input class="form-control" type="text" id="nombre" name="dni" required>
                             <div class="alert-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">
                               Error dni</div>
                         </div>
@@ -74,7 +75,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="form-label">Check In</span>
+                      <span class="form-label">Dia de Entrada</span>
                       <input class="form-control" type="date" id="fechaReservaIn" onkeydown="return false"  th:field="*{fechaEntrada}" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
                       <div class="alert-danger" th:if="${#fields.hasErrors('fechaEntrada')}" th:errors="*{fechaEntrada}"> Error en fecha Entrada</div>
                     </div>
@@ -82,7 +83,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="form-label">Check out</span>
+                      <span class="form-label">Dia de Salida</span>
                       <input class="form-control" type="date" id="fechaReservaOut" onkeydown="return false"  th:field="*{fechaSalida}" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" required>
                       <div class="alert-danger" th:if="${#fields.hasErrors('fechaSalida')}" th:errors="*{fechaSalida}"> Error en fecha Salida</div>
                     </div>

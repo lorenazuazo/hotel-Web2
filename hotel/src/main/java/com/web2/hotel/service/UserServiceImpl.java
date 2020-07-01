@@ -1,16 +1,29 @@
 package com.web2.hotel.service;
 
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.web2.hotel.DTO.CambiarPassword;
+import com.web2.hotel.entities.Authority;
+import com.web2.hotel.entities.Mensajes;
+import com.web2.hotel.entities.Reservas;
 import com.web2.hotel.entities.Usuario;
+import com.web2.hotel.repositories.RoleRepository;
 import com.web2.hotel.repositories.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserRepository usuarioRepo;
+	
+	@Autowired
+	RoleRepository roleRepo;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public Iterable<Usuario> getAlluser() {
@@ -21,7 +34,7 @@ public class UserServiceImpl implements UserService{
 	private boolean checkUsernameDisponible(Usuario user) throws Exception{
 		Optional<Usuario> userFound= usuarioRepo.findByUsername(user.getUsername());
 		if(userFound.isPresent()) {
-			throw new Exception("Username no disponible");
+			throw new Exception("Nombre de Usuario no disponible");
 		}
 		return true;
 	}
@@ -32,13 +45,20 @@ public class UserServiceImpl implements UserService{
 			throw new Exception("Confirmar Password es obligatorio");
 		}
 		if(!user.getPassword().equals(user.getConfirmPassword())){
-			throw new Exception("Password y Confirmar Password no son iguales");			
+			throw new Exception("Clave y Confirmar Clave no son iguales");			
 		}
 		return true;
 	}
 	@Override
 	public Usuario createUser(Usuario user) throws Exception {
 		if(checkUsernameDisponible(user)&& checkPassValido(user)) {
+			Set<Authority> setString=user.getAuthority();
+			if(setString == null) {
+				Set<Authority>rol=roleRepo.findByAuthority("ROLE_USER");
+				user.setAuthority(rol);
+			}
+			String encodePassword=bCryptPasswordEncoder.encode(user.getPassword());
+			user.setPassword(encodePassword);
 			user = usuarioRepo.save(user);
 		}
 		return user;
@@ -61,7 +81,7 @@ public class UserServiceImpl implements UserService{
 	public Usuario updateUser(Usuario formUser) throws Exception {
 		Optional<Usuario> user= usuarioRepo.findById(formUser.getId());
 		if (!user.isPresent()) {
-			   throw new Exception("No existe el usuario.");
+			   throw new Exception("No existe el usuario");
 			}
 
 		Usuario toUser = user.get();
@@ -76,8 +96,22 @@ public class UserServiceImpl implements UserService{
 		toUser.setDni(from.getDni());
 		toUser.setTelefono(from.getTelefono());
 		toUser.setUsername(from.getUsername());
+		toUser.setPassword(from.getPassword());
 		toUser.setAuthority(from.getAuthority());
 	
+	}
+	
+	@Override
+	public Usuario updateDatosOcultos(Usuario user) throws Exception {
+		Optional<Usuario>us=usuarioRepo.findById(user.getId());
+		Set<Authority>rol=us.get().getAuthority();
+		Set<Reservas>reservas=us.get().getReservas();
+		Set<Mensajes>mensajes=us.get().getMensaje();
+		
+		user.setAuthority(rol);
+		user.setReservas(reservas);
+		user.setMensaje(mensajes);
+		return user;
 	}
 
 	@Override
@@ -85,4 +119,30 @@ public class UserServiceImpl implements UserService{
 		Usuario user=usuarioRepo.findById(id).orElseThrow(()-> new Exception("No existe el usuario"));
 		usuarioRepo.delete(user);
 	}
+
+	@Override
+	public Usuario changePassword(CambiarPassword form) throws Exception {
+		Usuario storedUser = usuarioRepo.findById(form.getId())
+				.orElseThrow(() -> new Exception("Usuario no encontrado -"+this.getClass().getName()));
+
+		/*if(!storedUser.getPassword().equals(pw)) {
+			throw new Exception("Clave actual incorecta");
+		}
+		if(!bCryptPasswordEncoder.matches(pwguardadoString, pw1)) {
+			throw new Exception("Clave actual incorecta");
+		}
+		
+		if ( form.getPasswordActual().equals(form.getNewPassword())) {
+			throw new Exception("Nueva clave debe ser diferenta a clave actual");
+		}*/
+		
+		if( !form.getNewPassword().equals(form.getConfirmaPassword())) {
+			throw new Exception("la nueva clave y confirme clave no son iguales");
+		}
+		
+		String encodePass=bCryptPasswordEncoder.encode(form.getNewPassword());
+		storedUser.setPassword(encodePass);
+		return usuarioRepo.save(storedUser);
+	}
+
 }

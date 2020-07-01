@@ -24,13 +24,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+    	http.csrf().disable()
+        
         	.authorizeRequests()
         	.antMatchers(resources).permitAll()  
         	.antMatchers("/","/home","/registro","/tarifas","/fotos",
         			     "/habitaciones","/mensaje","/save-correo",
-        			     "/save-mensaje","/mis-datos").permitAll()
-        	.antMatchers("/modificaciones","/crearUser","editUser/{id}").access("hasRole('ADMIN')")	        
+        			     "/save-mensaje","/crear-cuenta","/disponibilidad",
+        			     "/registrar-usuario","/consultar-disponibilidad",
+        			     "/confirmareserva").permitAll()
+        	.antMatchers("/modificaciones","/crearUser","editUser/{id}","/editar-Usuario/cambiar-clave").access("hasRole('ADMIN')")	        
             .anyRequest().authenticated()
             .and()
         .formLogin()
@@ -38,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .permitAll()
             .defaultSuccessUrl("/" + "")
             .failureUrl("/login?error=true")
-            //.successForwardUrl("/inicio")//puse esto de mas ver
+            //.successForwardUrl("/")//pagina que va si hay errores
             .usernameParameter("username")
             .passwordParameter("password")
             .and()
@@ -62,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //que inicies la aplicacion, por lo cual tus contrasenas encriptadas no funcionaran bien
         return bCryptPasswordEncoder;
     }
-	
+  
 	
     
     //Registra el service para usuarios y el encriptador de contrasena

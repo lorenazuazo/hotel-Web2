@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.GenericGenerator;
 import com.sun.istack.NotNull;
-import com.web2.hotel.entities.Servicios.Estado;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

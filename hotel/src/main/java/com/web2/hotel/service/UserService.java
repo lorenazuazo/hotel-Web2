@@ -1,6 +1,8 @@
 package com.web2.hotel.service;
 
 import java.util.Optional;
+
+import com.web2.hotel.DTO.CambiarPassword;
 import com.web2.hotel.entities.Usuario;
 
 public interface UserService {
@@ -15,7 +17,13 @@ public interface UserService {
 	
 	public Usuario updateUser(Usuario user)throws Exception;
 	
+	public Usuario updateDatosOcultos(Usuario user)throws Exception;
+	
 	public void deleteUser(long id) throws Exception;
 	
+	public Usuario changePassword(CambiarPassword form) throws Exception;
+	
+	//public Usuario mapUsuarioDto(nuevoUsuarioDTO userDto) throws Exception;
+
 
 }

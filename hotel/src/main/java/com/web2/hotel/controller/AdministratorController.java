@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web2.hotel.entities.Newsletters;
+import com.web2.hotel.entities.Reservas;
 import com.web2.hotel.repositories.TipoHabitacionRepository;
 import com.web2.hotel.service.NewsletterService;
 
@@ -22,6 +23,7 @@ public class AdministratorController {
 	@GetMapping("/home")
 	public String getIndex(Model model) {
 		model.addAttribute("email", new Newsletters());/*creando un newsletter para que registre el mail de newsletter*/
+		model.addAttribute("reservaForm", new Reservas());
 		return "index";
 	}
 	

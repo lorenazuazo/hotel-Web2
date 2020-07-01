@@ -10,5 +10,6 @@ import com.web2.hotel.entities.Reservas.Estado;
 public interface ReservaRepository extends CrudRepository<Reservas, Long>{
 	
 	public ArrayList<Reservas> findAllByEstado(Estado estado);
+	
 
 }

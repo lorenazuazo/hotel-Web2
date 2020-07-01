@@ -12,16 +12,15 @@ _mesIn = _mesIn + 1; //con esto hago los meses de 1 al 12
 if (_mesIn < 10) {
     var mesIn = "0" + _mesIn;
 } else {
-    var mesIn = _mesIn.toString;
+    var mesIn = _mesIn.toString();
 }
 
 if (diaIn < 10) {
     var _diaIn = "0" + diaIn;
 } else {
-    var _diaIn = diaIn.toString;
+    var _diaIn = diaIn.toString();
 }
 var fecha_minIn = anioIn + '-' + mesIn + '-' + _diaIn;  
-//document.getElementById('fechaReserva').value = fecha_minIn;
 
 //para los placeholder de fechas
 document.getElementById('fechaReservaIn').value = fecha_minIn;
@@ -45,3 +44,15 @@ $('#fechaReservaOut').on('click', function() {
         document.getElementById("fechaReservaOut").setAttribute("min",date);
      }
 });
+//controla que la fecha de salida no sea menor a fecha de entrada
+function validar_fechas(){
+    var fechaReservaOut = $('#fechaReservaOut').val();
+    var fechaReservaIn = $('#fechaReservaIn').val();
+	if(fechaReservaOut < fechaReservaIn ){
+        alert("La fecha de salida debe ser mayor a la fecha de ingreso");
+        return false;
+    }else{
+        return true;
+    }  
+}
+

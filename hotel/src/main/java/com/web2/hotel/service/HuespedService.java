@@ -7,6 +7,8 @@ public interface HuespedService {
 	
 	public Huesped createHuesped(Huesped huesped) throws Exception;
 	
+	public Huesped createHuespedByDni(Huesped huesped)throws Exception;
+	
 	public Huesped getHuespedById(long id)throws Exception;
 	
 	public Huesped updateHuesped(Huesped fromHuesped)throws Exception;

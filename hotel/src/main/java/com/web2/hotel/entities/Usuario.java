@@ -25,15 +25,15 @@ public class Usuario implements Serializable {
 	protected long id;
 	
 	@Column(length=50)
-	@NotBlank
+	@NotBlank(message="Nombre no puede estar vacio")
 	protected String nombre;
 	
 	@Column(length=50)
-	@NotBlank
+	@NotBlank(message="Apellido no puede estar vacio")
 	protected String apellido;		
 
 	@Column
-	@NotBlank
+	@NotBlank(message="Correo no puede estar vacio")
 	@Email
 	protected String correo;
 	
@@ -42,19 +42,19 @@ public class Usuario implements Serializable {
 	protected void prepareData(){this.correo = correo == null ? null : correo.toLowerCase();}
 
 	@Column
-	@NotBlank
+	@NotBlank(message="Dni no puede estar vacio")
 	private String dni;
 
 	@Column
-	@NotBlank
+	@NotBlank(message="Telefono no puede estar vacio")
 	private String telefono;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message="Nombre de usuario no puede estar vacio")
 	private String username;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message="Clave no puede estar vacio")
 	private String password;
 	
 	@Transient 

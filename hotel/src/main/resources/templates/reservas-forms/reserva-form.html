@@ -99,6 +99,48 @@
             <a class="btn btn-secondary btnformuser" th:href="@{/consultar-disponibilidad}">Nueva Reserva</a>
             <input type="submit" class="btn btn-primary btnformuser" value="Guardar Cambios">
         </div>
-        <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">
-            Error</div>
+        <div id="campos"></div>
+            <label for="huespedGrupo">Agregar Huesped a la reserva</label>
+            <table class="table table-sm" id="tablahuesped">
+                <thead>
+                  <tr style="background-color: rgb(168, 143, 28);">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Dni</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="huesped:${reservaForm.huespedGrupo}">
+                    <td scope="row" th:text="${huesped.nombre}" th:field="${huesped.nombre}"></td>
+                    <td th:text="${huesped.apellido}" th:field="${huesped.apellido}"></td>
+                    <td th:text="${huesped.dni}" th:field="${huesped.dni}"></td>
+                    <td><input class="form-check-input" type="checkbox" th:field="${reservaForm.huespedGrupo}" th:value="${huesped.id}" checked>
+                    </td>
+                    <td>
+                   </tr>
+                 </tbody> 
+                </table> 
 </form>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <button type="button" class="btn btn-secondary btnformuser" onclick="agregahuesped()">Agregar Huesped</button>
+        </div>
+    </div>
+</div>
+
+<!-- mensaje que muestra que el huesped ya esta registrado -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div id="deleteError" th:if="${formErrorMessage}" class="alert alert-danger text-center" role="alert">
+                <span th:text="${formErrorMessage}"></span>
+            </div>        
+        </div>
+    </div>
+</div>
+
+
+

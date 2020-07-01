@@ -40,19 +40,19 @@
               <div class="form-header">
                 <h1>Comprobar Disponibilidad</h1>
               </div>
-              <form id="formReserva" th:object="${reservaForm}" method="post" th:action="@{/reserva}" autocomplete="off">
+              <form id="formReserva" th:object="${reservaForm}" method="post" th:onsubmit="return validar_fechas()" th:action="@{/disponibilidad}" autocomplete="off">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="form-label">Check In</span>
-                      <input class="form-control" type="date" id="fechaReservaIn" onkeydown="return false" required>
+                      <span class="form-label">Dia de Entrada</span>
+                      <input class="form-control" type="date" id="fechaReservaIn" name="fechaEntrada"  onkeydown="return false" required>
                     </div>
                     <span class="in-out hidden-xs hidden-sm">&#8652;</span>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <span class="form-label">Check out</span>
-                      <input class="form-control" type="date" id="fechaReservaOut" onkeydown="return false" required>
+                      <span class="form-label">Dia de Salida</span>
+                      <input class="form-control" type="date" id="fechaReservaOut" name="fechaSalida" th:value="${#temporals.format(localDate, 'yyyy-MM-dd')}" onkeydown="return false" required>
                     </div>
                   </div>
                 </div>
@@ -60,10 +60,13 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <span class="form-label">N<sup>o</sup>de Habitaciones</span>
-                      <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                      <select class="form-control" name="cantHabitaciones">
+                        <option th:value="1">1 Habitacion</option>
+                        <option th:value="2">2 Habitaciones</option>
+                        <option th:value="3">3 Habitaciones</option>
+                        <option th:value="4">4 Habitaciones</option>
+                        <option th:value="5">5 Habitaciones</option>
+                        <option th:value="6">6 Habitaciones</option>
                       </select>
                       <span class="select-arrow"></span>
                     </div>
@@ -71,10 +74,14 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <span class="form-label">Adultos</span>
-                      <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+                      <select class="form-control" name="cantAdultos">
+                        <option th:value="1">1 Adulto</option>
+                        <option th:value="2">2 Adultos</option>
+                        <option th:value="3">3 Adultos</option>
+                        <option th:value="4">4 Adultos</option>
+                        <option th:value="5">5 Adultos</option>
+                        <option th:value="6">6 Adultos</option>
+                        <option th:value="7">7 Adultos</option>
                       </select>
                       <span class="select-arrow"></span>
                     </div>
@@ -82,17 +89,20 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <span class="form-label">Niños</span>
-                      <select class="form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
+                      <select class="form-control" name="cantNinios">
+                        <option th:value="0">0 Niño</option>
+                        <option th:value="1">1 Niño</option>
+                        <option th:value="2">2 Niños</option>
+                        <option th:value="3">3 Niños</option>
+                        <option th:value="4">4 Niños</option>
+                        <option th:value="5">5 Niños</option>
                       </select>
                       <span class="select-arrow"></span>
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-btn">
-                      <button class="submit-btn btn">Disponibilidad</button>
+                      <button id="disponibilidad" class="submit-btn btn">Disponibilidad</button>
                     </div>
                   </div>
                 </div>

@@ -40,7 +40,6 @@
           <div class="alert-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}">
               Error en estado</div>
         </div> 
-
           <ul>
             <li th:each="caracteristica:${caractHabitacion}" id="checkbox" >
                 <input type="checkbox" name="searchValues" th:field="*{caractehabitacion}" th:value="${caracteristica.id}"/>

@@ -42,7 +42,7 @@
 <!-- barra de navegacion de modificaciones -->
 <div th:replace="/components/navadmin" th:remove="tag"></div>
 
-<!-- formulario y lista para modificar el usuario -->
+<!-- formulario y lista para modificar reservas -->
 <div th:replace="/reservas-forms/reserva-view"th:remove="tag"></div>
 
 <!-- modal para confirmar la eliminacion -->
@@ -66,5 +66,43 @@
       </div>
     </div>
   </div>
+
+  <!-- modal para agragar huesped nuevo en la reserva -->
+<div class="modal fade" id="agregahuesped" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <form  id="huespedForm" th:object="${nuevoHuesped}" method="post" th:action="@{/modificaciones/editar-Reserva-Huesped}">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Huesped</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombreHuesped"  placeholder="Nombre" required>
+          <div class="form-group">
+            <label for="apellido">Apellido</label>
+            <input type="text" class="form-control" name="apellido" id="apellidohuesped" placeholder="Apellido" required>
+          </div>
+          <div class="form-group">
+            <label for="dni">Dni</label>
+            <input type="text" class="form-control" name="dni" id="dnihuesped" placeholder="DNI" required>
+          </div>
+          <div class="form-group">
+            <label for="reserva">Id Reserva</label>
+            <input type="number" class="form-control" name="resAux" id="reservahuesped" placeholder="ID reserva">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

@@ -1,23 +1,27 @@
 package com.web2.hotel.controller;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.web2.hotel.DTO.CambiarPassword;
 import com.web2.hotel.entities.Authority;
 import com.web2.hotel.entities.CaracteristicasHabitacion;
 import com.web2.hotel.entities.Habitacion;
 import com.web2.hotel.entities.Huesped;
 import com.web2.hotel.entities.Reservas;
-import com.web2.hotel.entities.Servicios;
 import com.web2.hotel.entities.TipoHabitacion;
 import com.web2.hotel.entities.Usuario;
 import com.web2.hotel.repositories.RoleRepository;
@@ -27,7 +31,6 @@ import com.web2.hotel.service.HabitacionService;
 import com.web2.hotel.service.HuespedService;
 import com.web2.hotel.service.ReservaService;
 import com.web2.hotel.service.RolesService;
-import com.web2.hotel.service.ServiciosService;
 import com.web2.hotel.service.TipoHabitacionService;
 import com.web2.hotel.service.UserService;
 
@@ -90,6 +93,7 @@ public class ModificacionesControler {
 		model.addAttribute("userForm",user);
 		model.addAttribute("formTab","active");
 		model.addAttribute("editMode","true");/*activo el modo edicion*/
+		model.addAttribute("passwordForm",new CambiarPassword(id));
 		return "admin-form-user";
 	}
 	
@@ -99,6 +103,7 @@ public class ModificacionesControler {
 			model.addAttribute("userForm", user);
 			model.addAttribute("formTab", "active");
 			model.addAttribute("editMode","true");/*activo el modo edicion*/
+			model.addAttribute("passwordForm",new CambiarPassword(user.getId()));
 		}else {
 			try {
 				userService.updateUser(user);
@@ -111,6 +116,7 @@ public class ModificacionesControler {
 				model.addAttribute("userList", userService.getAlluser());
 				model.addAttribute("roles", roleRepo.findAll());
 				model.addAttribute("editMode","true");/*activo el modo edicion*/
+				model.addAttribute("passwordForm",new CambiarPassword(user.getId()));
 
 			}
 		}
@@ -118,6 +124,27 @@ public class ModificacionesControler {
 		model.addAttribute("userList", userService.getAlluser());
 		model.addAttribute("roles", roleRepo.findAll());
 		return "admin-form-user";		
+	}
+	
+	
+	@PostMapping("/cambiar-clave")
+	public ResponseEntity<String> postEditUseChangePassword(@Valid @RequestBody CambiarPassword form, Errors errors) {
+		/*recibe los datos y los mapea en el objeto form de tipo dto cambiarPasword*/
+		try {
+			//si hay errorer lo mete en un string y desde ahi se manejan las excepciones
+	        if (errors.hasErrors()) {
+	            String result = errors.getAllErrors()
+	                        .stream().map(x -> x.getDefaultMessage())
+	                        .collect(Collectors.joining(""));
+
+	            throw new Exception(result);
+	        }
+	        
+			userService.changePassword(form);/*por aca va si no hay errores*/
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(e.getMessage());/*esto anda al jquery los errores y los maneja el script*/
+		}
+		return ResponseEntity.ok("success");
 	}
 	
 	@GetMapping("/deleteUser/{id}")
@@ -407,8 +434,11 @@ public class ModificacionesControler {
 		model.addAttribute("reservaForm", new Reservas());/*para guardar las modificaciones*/
 		model.addAttribute("reservaList", reservaService.getAllReservas());/*Lista de reservas en BBDD*/
 		model.addAttribute("listTab","active");/*esto dice que ventana esta activa cuando entra*/
+		ArrayList<Huesped>huespedList=new ArrayList<>();
+		model.addAttribute("huespedList", huespedList);
 		return "admin-form-reserva";
 	}
+	
 	
 	@PostMapping("/editar-Reserva")
 	public String seteditReserva(@Valid @ModelAttribute("reservaForm")Reservas reserva, BindingResult result, Model model) {
@@ -434,9 +464,21 @@ public class ModificacionesControler {
 
 		return "admin-form-reserva";
 	}
+	@PostMapping("/editar-Reserva-Huesped")
+	public String agregarHuesped(@Valid @ModelAttribute("nuevoHuesped")Huesped huesped,BindingResult result,Model model) throws Exception {
+		try {
+				huespedService.createHuespedByDni(huesped);
+			} catch (Exception e) {
+				model.addAttribute("formErrorMessage", e.getMessage());
+			}
+		
+		
+		return getEditReserva(model, huesped.getResAux());
+	}
 	
 	@GetMapping("/editReserva/{idReserva}")
 	public String getEditReserva(Model model,@PathVariable(name="idReserva")Long id)throws Exception {
+		model.addAttribute("nuevoHuesped", new Huesped());
 		Reservas reserva= reservaService.getReservaById(id);
 		model.addAttribute("reservaList", reservaService.getAllReservas());
 		model.addAttribute("reservaForm",reserva);
@@ -446,6 +488,7 @@ public class ModificacionesControler {
 		model.addAttribute("editMode","true");/*activo el modo edicion*/
 		return "admin-form-reserva";
 	}
+	
 	
 	@GetMapping("/deleteReserva/{idReserva}")
 	public String deleteReserva(Model model, @PathVariable(name="idReserva") Long id) {
@@ -461,92 +504,8 @@ public class ModificacionesControler {
 	public String cancelEditReserva(Model model) {
 		return "redirect:/modificaciones/reservas";
 	}
-	
-	/*modificaciones de servicios*/
-	@Autowired
-	ServiciosService servicioService;
-	
-	
-	@GetMapping("/servicios")
-	public String getServicios(Model model) {
-		model.addAttribute("servicioForm", new Servicios());/*para guardar las modificaciones*/
-		model.addAttribute("servicioList", servicioService.getAllServicios());/*Lista de servicios en BBDD*/
-		model.addAttribute("listTab","active");/*esto dice que ventana esta activa cuando entra*/
-		return "admin-form-servicios";
-	}
-	
-	@PostMapping("/editar-Servicio")
-	public String seteditServicio(@Valid @ModelAttribute("servicioForm")Servicios servicio, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute("servicioForm", servicio);
-			model.addAttribute("servicioList", servicioService.getAllServicios());
-			model.addAttribute("formTab", "active");
-		}else {
-			try {
-				servicioService.updateServicio(servicio);
-				model.addAttribute("servicioForm", new Servicios());
-				model.addAttribute("servicioList", servicioService.getAllServicios());
-				model.addAttribute("listTab", "active");
-			} catch (Exception e) {
-				model.addAttribute("formErrorMessage", e.getMessage());
-				model.addAttribute("servicioForm", servicio);
-				model.addAttribute("formTab", "active");
-				model.addAttribute("servicioList", servicioService.getAllServicios());
-			}
-			
-			model.addAttribute("servicioList",servicioService.getAllServicios());
-		}
 
-		return "admin-form-servicios";
-	}
 	
-	@GetMapping("/editar-Servicio/{idServicio}")
-	public String getEditServicio(Model model,@PathVariable(name="idServicio")Long id)throws Exception {
-		Servicios servicio= servicioService.getServicioById(id);
-		model.addAttribute("servicioList", servicioService.getAllServicios());
-		model.addAttribute("servicioForm",servicio);
-		model.addAttribute("formTab","active");
-		model.addAttribute("editMode","true");/*activo el modo edicion*/
-		return "admin-form-servicios";
-	}
-	
-	@PostMapping("/crearServicio")
-	public String setCrearServicio(@Valid @ModelAttribute("servicioForm")Servicios servicio, BindingResult result, Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute("servicioForm", servicio);
-			model.addAttribute("formTab", "active");
-		}else {
-			try {
-				servicioService.crearServicio(servicio);
-				model.addAttribute("servicioForm", new Servicios());
-				model.addAttribute("listTab", "active");
-			} catch (Exception e) {
-				model.addAttribute("formErrorMessage", e.getMessage());
-				model.addAttribute("servicioForm", servicio);
-				model.addAttribute("formTab", "active");
-				model.addAttribute("servicioList", servicioService.getAllServicios());
-			}
-			
-			model.addAttribute("servicioList",servicioService.getAllServicios());
-		}
-
-		return "admin-form-servicios";
-	}
-	
-	@GetMapping("/eliminar-servicio/{idServicio}")
-	public String deleteServicio(Model model, @PathVariable(name="idServicio") Long id) {
-		try {
-			servicioService.deleteServicio(id);
-		} catch (Exception e) {
-			model.addAttribute("deleteError","No se pudo eliminar el servicio");
-		}
-		return getServicios(model); //es lo mismo que redirect per mantengo el mensaje de error
-	}
-	
-	@GetMapping("/servicio/cancel")
-	public String cancelEditServicio(Model model) {
-		return "redirect:/modificaciones/servicios";
-	}
 	
 	/*modificaciones en roles*/
 	@Autowired
@@ -671,6 +630,7 @@ public class ModificacionesControler {
 		Huesped huesped= huespedService.getHuespedById(id);
 		model.addAttribute("huespedList",huespedService.getAllHuesped());
 		model.addAttribute("huespedForm",huesped);
+		model.addAttribute("reservaForm", reservaService.getAllReservasConfirmadas());
 		model.addAttribute("formTab","active");
 		model.addAttribute("editMode","true");/*activo el modo edicion*/
 		return "admin-form-huesped";

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.web2.hotel.entities.Reservas;
+import com.web2.hotel.entities.Usuario;
 import com.web2.hotel.service.HabitacionService;
 import com.web2.hotel.service.ReservaService;
 
@@ -38,6 +39,7 @@ public class ReservaController {
 				//busco habitaciones disponibles, tarifa total, cantidad de noches
 				Reservas reservaAux=habitacionService.getTarifaReserva(reserva);
 				model.addAttribute("reservaForm", reservaAux);
+				model.addAttribute("newUser", new Usuario()); 
 			} catch (Exception e) {
 				model.addAttribute("formErrorMessage", e.getMessage());
 				model.addAttribute("reservaForm", reserva);
@@ -48,16 +50,20 @@ public class ReservaController {
 	
 	@PostMapping("/confirmareserva")
 	public String setReserva(@Valid @ModelAttribute("reservaForm")Reservas reserva, BindingResult result, Model model) {
-		try {
-			reservaService.registrarReserva(reserva);
+		if(result.hasErrors()) {
 			model.addAttribute("reservaForm", reserva);
-			model.addAttribute("formMessage", "La reserva se realizo con exito");
-			model.addAttribute("exito", "true");
-		} catch (Exception e) {
-			model.addAttribute("reservaForm", reserva);
-			model.addAttribute("formMessage", e.getMessage());
-			model.addAttribute("exito", "false");
+		}else {
+			try {
+				reservaService.registrarReserva(reserva);
+				model.addAttribute("formMessage", "La reserva se realizo con exito");
+				model.addAttribute("exito", "true");
+			} catch (Exception e) {
+				model.addAttribute("reservaForm", reserva);
+				model.addAttribute("formMessage", e.getMessage());
+				model.addAttribute("exito", "false");
+			}
 		}
+		
 		return "muestrareserva";
 	}
 

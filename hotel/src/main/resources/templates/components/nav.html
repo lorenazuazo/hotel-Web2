@@ -62,7 +62,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" th:href="@{'/mis-datos/'+ ${#httpServletRequest.remoteUser}}">
               Mis Datos</a>
-              <a class="dropdown-item" th:href="@{'/mis-datos/'+ ${#httpServletRequest.remoteUser}}">
+              <a class="dropdown-item" th:href="@{'/mis-reservas/'+ ${#httpServletRequest.remoteUser}}">
                 Mis Resevas</a>
             <form id="CerrarSesion" th:action="@{/logout}" method="post">
               <a class="dropdown-item " href="javascript:;" onclick="document.getElementById('CerrarSesion').submit()">Cerrar Sesion</a>

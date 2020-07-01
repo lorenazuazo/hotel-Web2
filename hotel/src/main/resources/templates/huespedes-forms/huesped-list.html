@@ -5,11 +5,7 @@
 			<th scope="col">Id</th>
 			<th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
-            <th scope="col">Genero</th>
-            <th scope="col">Correo</th>
             <th scope="col">Dni</th>
-            <th scope="col">Edad</th>
-            <th scope="col">Telefono</th>
 			<th></th>
 		</tr>
 		</thead>
@@ -18,11 +14,7 @@
 			<th scope="row" th:text="${huesped.id}"></th>
 			<td th:text="${huesped.nombre}"></td>
 			<td th:text="${huesped.apellido}"></td>
-			<td th:text="${huesped.sexo}"></td>
-            <td th:text="${huesped.correo}"></td>
             <td th:text="${huesped.dni}"></td>
-            <td th:text="${huesped.edad}"></td>
-            <td th:text="${huesped.telefono}"></td>
 			<td>
 				<a title="editar" href="#" th:href="@{'/modificaciones/editar-Huesped/'+ ${huesped.id}}"><i class="fas fa-edit"></i></a>
 				<a title="eliminar" href="#" th:onclick="'javascript:confirmDelete(\''+ ${huesped.id} +'\');'"><i class="fas fa-user-times"></i></a>

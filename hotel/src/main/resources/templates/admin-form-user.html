@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--JQUERY-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -66,5 +66,42 @@
       </div>
     </div>
   </div>
+  <!-- modal para cambiar contrasena -->
+  
+  <div th:if="${editMode}" class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changePasswordLongModal">Cambiar Contrasena</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="changePasswordForm" th:object="${passwordForm}" method="POST" autocomplete="off" class="form" role="form">
+              <input class="form-control" type="hidden" th:field="${passwordForm.id}">
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Nueva Contrasena</label>
+                  <div class="col-lg-9">
+                      <input class="form-control" type="password" th:field="${passwordForm.newPassword}">
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Confirmar Contrasena</label>
+                  <div class="col-lg-9">
+                      <input class="form-control" type="password" th:field="${passwordForm.confirmaPassword}">
+                  </div>
+              </div>
+          </form>
+          <div class="alert alert-danger text-center" style="display: none;" id="changePasswordError">Change Password Error</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" onClick="submitChangePassword()" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </body>
 </html>

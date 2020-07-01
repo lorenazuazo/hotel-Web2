@@ -4,6 +4,8 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <!--JQUERY-->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--para usar bootstrap  -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- font-awesom -->
@@ -41,7 +43,7 @@
               <div class="form-header">
                 <h3>Disponibilidad</h3>
               </div>
-              <form id="formReserva" th:object="${reservaForm}" method="post" th:action="@{/confirmareserva}" autocomplete="off">
+              <form id="formReserva" th:object="${reservaForm}" method="post" th:onsubmit="return check_usuario_registrado()" th:action="@{/confirmareserva}" autocomplete="off">
                 <input class="form-group" type="hidden" name="username" th:value="${#httpServletRequest.remoteUser}" id="username">
                 <input class="form-group" type="hidden" th:field="*{dni}" th:value="${dni}" id="dni">
                 <input class="form-group" type="hidden" th:field="*{cantDias}" th:value="*{cantDias}">
@@ -74,7 +76,7 @@
                   </div>
                   <label for="cantNinios" class="col-sm-2 col-form-label">Niños:</label>
                   <div class="col-sm-2">
-                    <input type="text" readonly class="form-control-plaintext text-primary" id="dni" th:field="*{cantNinios}">
+                    <input type="text" readonly class="form-control-plaintext text-primary" id="cantNinios" th:field="*{cantNinios}">
                   </div>
                   <div class="col-lg-12 text-center">
                     <label for="tarifaReserva" class="col-sm-6 col-form-label" th:field="*{cantDias}" th:text="'Monto Total por '+ *{cantDias} +' noche/s'">Monto por :</label>
@@ -104,9 +106,11 @@
                     </tr>
                   </tbody> 
                 </table>
-                
+                <div class="alert alert-success text-center" style="display: none;" id="formSuccess">Correcto</div>
+
                 <div class="col-lg-12 text-center">
-                  <a class="btn btn-secondary btnformuser" th:href="@{/consultar-disponibilidad}">Modificar Reserva</a>
+                  <a class="btn btn-secondary btnformuser" sec:authorize="isAuthenticated()" th:href="@{/consultar-disponibilidad}">Modificar Reserva</a>
+                  <a class="btn btn-secondary btnformuser" sec:authorize="isAnonymous()" th:href="@{/home}">Modificar Reserva</a>
                   <input th:if="${!reservaForm.habitacion.isEmpty()}" type="submit" class="btn btn-primary btnformuser" th:value="Reservar"> 
               </div>    
               </form>
@@ -117,7 +121,83 @@
     </div>
   </div>
 
-  <div th:replace="/components/scripts" th:remove="tag"></div>
+  <!-- modal para registrar usuario -->
+  <div class="modal fade" id="registrarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="registrarUsuario" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changePasswordLongModal">Registrarse</h5>
+        
+        </div>
+        <div class="modal-body">
+          <form id="newUserForm" th:object="${newUser}" method="POST" autocomplete="off" class="form" role="form">
+              
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+                  <div class="col-lg-9">
+                      <input class="form-control" type="text" id="nombreDto" th:field="${newUser.nombre}">
+                  </div>
+              </div>
+              <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label">Apellido</label>
+                  <div class="col-lg-9">
+                      <input class="form-control" type="text" id="apellidoDto" th:field="${newUser.apellido}">
+                  </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Correo</label>
+                <div class="col-lg-9">
+                    <input class="form-control" type="email" id="correoDto" th:field="${newUser.correo}">
+                </div>
+              </div>
+              <div class="form-group row">
+               <label class="col-lg-3 col-form-label form-control-label">Dni</label>
+               <div class="col-lg-9">
+                  <input class="form-control" type="text" id="dniDto" th:field="${newUser.dni}">
+              </div>
+            </div>
+            <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Telefono</label>
+            <div class="col-lg-9">
+                <input class="form-control" type="text" id="telefonoDto" th:field="${newUser.telefono}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Nombre de usuario</label>
+            <div class="col-lg-9">
+                <input class="form-control" type="text" id="usernameDto" th:field="${newUser.username}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Contraseña</label>
+            <div class="col-lg-9">
+                <input class="form-control" type="password" id="passwordDto" th:field="${newUser.password}">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Confirmar Contraseña</label>
+            <div class="col-lg-9">
+                <input class="form-control" type="password" id="confirmPasswordDto" th:field="${newUser.confirmPassword}">
+            </div>
+          </div>
+          </form>
+          <div class="alert alert-danger text-center" style="display: none;" id="registroError">registr usuario Error</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" onClick="registrarUsuario()" class="btn btn-primary">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+   <!-- script del formulario-->
+   <script type="text/javascript" th:src="@{/js/registrar-usuario.js}"></script>
+
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+ 
+ 
     
   </body>
   </html>

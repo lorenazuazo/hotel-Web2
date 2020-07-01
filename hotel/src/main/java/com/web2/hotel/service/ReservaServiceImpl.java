@@ -1,12 +1,19 @@
 package com.web2.hotel.service;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.web2.hotel.entities.Huesped;
 import com.web2.hotel.entities.Reservas;
 import com.web2.hotel.entities.Reservas.Estado;
 import com.web2.hotel.entities.Usuario;
+import com.web2.hotel.repositories.HuespedRepository;
 import com.web2.hotel.repositories.ReservaRepository;
 import com.web2.hotel.repositories.UserRepository;
 
@@ -23,6 +30,12 @@ public class ReservaServiceImpl implements ReservaService {
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	HuespedService huespedService;
+	
+	@Autowired
+	HuespedRepository huespedRepo;
+	
 	@Override
 	public Iterable<Reservas> getAllReservas() {
 		return reservaRepo.findAll();
@@ -35,6 +48,18 @@ public class ReservaServiceImpl implements ReservaService {
 		Reservas toReserva = new Reservas();
 		mapReserva(reserva, toReserva,usuario);
 		reservaRepo.save(toReserva);
+		/*guarda cada huesped si no esta registrado*/
+		if (!(reserva.getHuespedGrupo() == null)) {
+			for(Huesped huesped: reserva.getHuespedGrupo()) {
+				Optional<Huesped> huesp=huespedRepo.findById(huesped.getId());
+				if(!huesp.isPresent()) {
+					huespedService.createHuesped(huesped);
+				}
+			}
+		}
+		
+		
+		
 	}
 	/*mapeo el usuario desde formUser a toUser*/
 	protected void mapReserva(Reservas from,Reservas toReserva,Usuario us) {
@@ -51,6 +76,7 @@ public class ReservaServiceImpl implements ReservaService {
 		toReserva.setTarifaReserva(from.getTarifaReserva());
 		toReserva.setEstado(Estado.CONFIRMADA); 
 		toReserva.setUsuario(us);
+		toReserva.setHuespedGrupo(from.getHuespedGrupo());
 		toReserva.setHabitacion(from.getHabitacion());
 	}
 
@@ -106,7 +132,26 @@ public class ReservaServiceImpl implements ReservaService {
 		reservaTo.setTarifaReserva(from.getTarifaReserva());
 		reservaTo.setEstado(from.getEstado()); 
 		reservaTo.setUsuario(from.getUsuario());
+		reservaTo.setHuespedGrupo(from.getHuespedGrupo());
 		reservaTo.setHabitacion(from.getHabitacion());
+	}
+
+
+	@Override
+	public Set<Reservas> getMisReservas(String dni) throws Exception {
+		Iterable<Reservas>reservas= getAllReservas();
+		Set<Reservas>misReservas=new HashSet<>();
+		if(!(reservas==null)) {
+			for(Reservas reserva:reservas ) {
+				if(reserva.getDni().equals(dni)) {
+					misReservas.add(reserva);
+				}
+			}
+		}
+		if(misReservas.isEmpty() || misReservas == null ) {
+			throw new Exception("No hay reservas a su nombre");
+		}
+		return misReservas;
 	}
 
 }

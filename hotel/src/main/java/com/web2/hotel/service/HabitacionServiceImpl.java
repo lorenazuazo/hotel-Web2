@@ -189,6 +189,9 @@ public class HabitacionServiceImpl implements HabitacionService{
 		LocalDate fechaOut=reserva.getFechaSalida();
 
 		long dias = DAYS.between(fechaIn, fechaOut);
+		if(fechaIn.equals(fechaOut)) {
+			dias=1;
+		}
 		int monto=0;
 		int cantHabitaciones=0;
 		for(Habitacion h:reserva.getHabitacion()) {

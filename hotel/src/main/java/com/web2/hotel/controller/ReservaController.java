@@ -1,5 +1,8 @@
 package com.web2.hotel.controller;
 
+import java.util.Optional;
+import java.util.Set;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.web2.hotel.entities.Authority;
 import com.web2.hotel.entities.Reservas;
 import com.web2.hotel.entities.Usuario;
 import com.web2.hotel.service.HabitacionService;
 import com.web2.hotel.service.ReservaService;
+import com.web2.hotel.service.UserService;
 
 
 @Controller
@@ -22,6 +28,9 @@ public class ReservaController {
 	
 	@Autowired
 	HabitacionService habitacionService;
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping("/consultar-disponibilidad")
 	public String getReserva(Model model) {
@@ -38,6 +47,20 @@ public class ReservaController {
 				reserva.setHabitacion(habitacionService.getHabitacionesDisponibles(reserva));
 				//busco habitaciones disponibles, tarifa total, cantidad de noches
 				Reservas reservaAux=habitacionService.getTarifaReserva(reserva);
+				String username=userService.getUsuarioLogueado();
+				Optional<Usuario> usuarioLogueado=userService.getUserByUsername(username);
+				boolean isAdmin=false;
+				if(usuarioLogueado.isPresent()) {
+					isAdmin=userService.isAdmin(usuarioLogueado);
+				}
+							
+				if(!username.equals("anonymousUser")&&(!isAdmin)) {
+					reservaAux.setUsername(username);
+					reservaAux.setApellido(usuarioLogueado.get().getApellido());
+					reservaAux.setNombre(usuarioLogueado.get().getNombre());
+					reservaAux.setDni(usuarioLogueado.get().getDni());
+				}
+				
 				model.addAttribute("reservaForm", reservaAux);
 				model.addAttribute("newUser", new Usuario()); 
 			} catch (Exception e) {

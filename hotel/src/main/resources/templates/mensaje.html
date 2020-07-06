@@ -45,30 +45,36 @@
     <div class="row">
         <div class="col-md-8">
             <div class="well well-sm">
-                <form th:action="@{/save-mensaje}" th:object="${mensajes}" method="post">
+                <form th:action="@{/guardar-mensaje}" th:object="${mensajeForm}" method="post">
                 <div class="row"> 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input th:field="*{nombre}" type="text" class="form-control" placeholder="Nombre" required="required" />
+                            <input th:field="*{nombre}" type="text" class="form-control" placeholder="Nombre" required/>
+                            <div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+                                Error en Nombre</div>
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
-                            <input th:field="*{apellido}" type="text" class="form-control"  placeholder="Apellido" required="required" />
+                            <input th:field="*{apellido}" type="text" class="form-control"  placeholder="Apellido" required/>
+                            <div class="alert-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">
+                                Error en apellido</div>
                         </div>
                         <div class="form-group">
                             <label for="correo">Email</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
                                 </span>
-                                <input th:field="*{correo}" type="email" class="form-control" id="email" placeholder="Email" required="required" />
+                                <input th:field="*{correo}" type="email" class="form-control" id="email" placeholder="Email" required/>
+                                <div class="alert-danger" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}">
+                                    Error en Nombre</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="mensaje">Mensaje</label>
-                            <textarea th:field="*{mensaje}"  id="mensaje" class="form-control" rows="8" cols="25" required="required">
+                            <textarea th:field="*{mensaje}"  id="mensaje" class="form-control" rows="8" cols="25" required>
                             </textarea>
                         </div>
                     </div>
@@ -77,6 +83,10 @@
                             enviar mensaje</button>
                     </div>
                 </div>
+                <div th:if="${formOKMessage}" class="alert alert-success text-center" role="alert">
+                    mensaje enviado ok</div>
+                <div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">
+                    Error</div>
                 </form>
             </div>
         </div>

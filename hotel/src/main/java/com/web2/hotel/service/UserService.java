@@ -23,7 +23,9 @@ public interface UserService {
 	
 	public Usuario changePassword(CambiarPassword form) throws Exception;
 	
-	//public Usuario mapUsuarioDto(nuevoUsuarioDTO userDto) throws Exception;
+	public String getUsuarioLogueado()throws Exception;
+	
+	public boolean isAdmin(Optional<Usuario> usuarioLogueado)throws Exception;
 
 
 }

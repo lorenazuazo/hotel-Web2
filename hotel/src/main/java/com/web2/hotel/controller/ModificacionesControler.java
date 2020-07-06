@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.web2.hotel.DTO.CambiarPassword;
+import com.web2.hotel.DTO.MensajesDTO;
 import com.web2.hotel.entities.Authority;
 import com.web2.hotel.entities.CaracteristicasHabitacion;
 import com.web2.hotel.entities.Habitacion;
@@ -29,6 +30,8 @@ import com.web2.hotel.repositories.UserRepository;
 import com.web2.hotel.service.CaracteristicasHabitacionService;
 import com.web2.hotel.service.HabitacionService;
 import com.web2.hotel.service.HuespedService;
+import com.web2.hotel.service.MensajeService;
+import com.web2.hotel.service.MesajesUsuarioAnonimoService;
 import com.web2.hotel.service.ReservaService;
 import com.web2.hotel.service.RolesService;
 import com.web2.hotel.service.TipoHabitacionService;
@@ -675,7 +678,22 @@ public class ModificacionesControler {
 		return "redirect:/modificaciones/huesped";
 	}
 	
+	@Autowired
+	MensajeService mensajeService;
 	
+	/*para visualizar los mensajes*/
+	@GetMapping("/ver-mensajes")
+	public String getMensajes(Model model) {
+		try {
+			Iterable<MensajesDTO>mensajes=mensajeService.getMensajes();
+			model.addAttribute("mensajeList", mensajes);
+			model.addAttribute("listTab","active");
+		} catch (Exception e) {
+			model.addAttribute("deleteError",e.getMessage());
+		}
+			
+		return "admin-form-mensajes";
+	}
 
 }
 

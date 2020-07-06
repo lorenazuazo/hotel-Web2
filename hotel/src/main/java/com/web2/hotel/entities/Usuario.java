@@ -1,6 +1,7 @@
 package com.web2.hotel.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -8,7 +9,9 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.GenericGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name="usuario")
@@ -71,7 +74,8 @@ public class Usuario implements Serializable {
     @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario")
     private Set<Reservas> reservas;
 	
-    
-    @OneToMany(fetch=FetchType.LAZY,mappedBy="usuario")
-    private Set<Mensajes> mensaje;
+    @ToString.Exclude
+	@EqualsAndHashCode.Exclude
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="usuario")
+    private Set<Mensajes> mensaje=new HashSet<>();
 }

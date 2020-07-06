@@ -19,10 +19,10 @@ function submitChangePasswordUser(){
             
             $("#changePasswordError").hide();
             $("#formSuccess").show();
-            $("#formSuccess").html("Clave actulizada correctamente");
+            $("#formSuccess").html("Clave actulizada correctamente, debe iniciar sesion para validar sus cambios");
 
             $('#PasswordModal').modal('toggle');/*togle es para que si esta visible lo oculte y si esta oculto lo muestra*/
-            setTimeout(function(){	$("#formSuccess").hide('slow'); }, 3000);/*hide slow es para que se esconda despacio y luego de  -2000 es dos seg*/
+            setTimeout(function(){	$("#formSuccess").hide('slow'); }, 5000);/*hide slow es para que se esconda despacio y luego de  -2000 es dos seg*/
             
           },
         error: function (e) {

@@ -11,6 +11,8 @@ import com.web2.hotel.entities.Reservas;
 import com.web2.hotel.entities.Usuario;
 import com.web2.hotel.repositories.RoleRepository;
 import com.web2.hotel.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
@@ -49,9 +51,19 @@ public class UserServiceImpl implements UserService{
 		}
 		return true;
 	}
+	
+
+	public boolean checkEmailDisponible(Usuario user) throws Exception {
+		Optional<Usuario> userFound= usuarioRepo.findByCorreo(user.getCorreo());
+		if(userFound.isPresent()) {
+			throw new Exception("Usted ya tiene una cuenta Inicie Sesion");
+		}
+		return true;
+	}
+	
 	@Override
 	public Usuario createUser(Usuario user) throws Exception {
-		if(checkUsernameDisponible(user)&& checkPassValido(user)) {
+		if(checkEmailDisponible(user) && checkUsernameDisponible(user)&& checkPassValido(user)) {
 			Set<Authority> setString=user.getAuthority();
 			if(setString == null) {
 				Set<Authority>rol=roleRepo.findByAuthority("ROLE_USER");
@@ -144,5 +156,32 @@ public class UserServiceImpl implements UserService{
 		storedUser.setPassword(encodePass);
 		return usuarioRepo.save(storedUser);
 	}
+	@Override
+	public String getUsuarioLogueado() throws Exception {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username;
+		
+		
+		if (principal instanceof UserDetails) { 
+			 username = ((UserDetails)principal).getUsername(); 
+			} else { 
+			username = principal.toString(); 
+			}
+		
+		return username;
+	}
+
+	@Override
+	public boolean isAdmin(Optional<Usuario> usuarioLogueado) throws Exception {
+		Set<Authority> roles = usuarioLogueado.get().getAuthority();
+		boolean isAdmin=false;
+		for(Authority rol: roles) {
+			if(rol.getAuthority().equals("ROLE_ADMIN")) {
+				isAdmin=true;
+			}
+		}
+		return isAdmin;
+	}
+	
 
 }

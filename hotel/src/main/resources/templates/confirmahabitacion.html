@@ -56,7 +56,7 @@
                 <div class="form-group row">
                   <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
                   <div class="col-sm-2">
-                    <input type="text" readonly class="form-control-plaintext text-primary" id="nombre" th:field="*{nombre}">
+                    <input type="text" readonly class="form-control-plaintext text-primary" id="nombre" th:field="*{nombre}" th:value="*{nombre}">
                   </div>
                   <label for="apellido" class="col-sm-2 col-form-label">Apellido:</label>
                   <div class="col-sm-2">
@@ -111,7 +111,10 @@
                 <div class="col-lg-12 text-center">
                   <a class="btn btn-secondary btnformuser" sec:authorize="isAuthenticated()" th:href="@{/consultar-disponibilidad}">Modificar Reserva</a>
                   <a class="btn btn-secondary btnformuser" sec:authorize="isAnonymous()" th:href="@{/home}">Modificar Reserva</a>
-                  <input th:if="${!reservaForm.habitacion.isEmpty()}" type="submit" class="btn btn-primary btnformuser" th:value="Reservar"> 
+                  
+                  <input id="iniciarSesion" sec:authorize="isAnonymous()" type="submit" class="btn btn-primary btnformuser" value="Registrarse">
+
+                  <input th:if="${reservaForm.habitacion}" type="submit" class="btn btn-primary btnformuser" th:value="Reservar"> 
               </div>    
               </form>
             </div>
@@ -120,6 +123,7 @@
       </div>
     </div>
   </div>
+
 
   <!-- modal para registrar usuario -->
   <div class="modal fade" id="registrarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="registrarUsuario" aria-hidden="true">
@@ -185,11 +189,15 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" onClick="registrarUsuario()" class="btn btn-primary">Registrar</button>
+          <button id="registrarUsuarioBtn" type="button" onClick="registrarUsuario()" class="btn btn-primary">Registrar</button>
+
         </div>
       </div>
     </div>
   </div> 
+
+
+ 
 
    <!-- script del formulario-->
    <script type="text/javascript" th:src="@{/js/registrar-usuario.js}"></script>
